@@ -18,7 +18,6 @@ namespace Core.Services
 
         public async Task<Usuario?> Autenticar(string email, string senha)
         {
-            senha = _criptografiaService.Descriptografar(senha);
             var usuario = await _autenticacaoRepository.Autenticar(email, senha);
 
             if (usuario == null || usuario.Senha != senha) // aqui você pode aplicar hashing e comparar
