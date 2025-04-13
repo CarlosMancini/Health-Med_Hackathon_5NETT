@@ -1,3 +1,4 @@
+using HealthMed.Extensions;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.IdentityModel.Tokens;
 using System.Text;
@@ -8,6 +9,7 @@ var jwtKey = builder.Configuration["Jwt:Key"];
 
 // Add services to the container.
 builder.Services.AddControllers();
+builder.Services.Inject(builder.Configuration);
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 

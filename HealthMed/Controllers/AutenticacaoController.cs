@@ -5,13 +5,13 @@ using Microsoft.AspNetCore.Mvc;
 
 [ApiController]
 [Route("api/[controller]")]
-public class AutorizacaoController : ControllerBase
+public class AutenticacaoController : ControllerBase
 {
     private readonly IUsuarioService _autenticacaoService;
     private readonly ICriptografiaService _cpriptografiaService;
     private readonly ITokenService _tokenService;
         
-    public AutorizacaoController(IUsuarioService autenticacaoService, ICriptografiaService criptografiaService, ITokenService tokenService)
+    public AutenticacaoController(IUsuarioService autenticacaoService, ICriptografiaService criptografiaService, ITokenService tokenService)
     {
         _autenticacaoService = autenticacaoService;
         _cpriptografiaService = criptografiaService;
@@ -21,7 +21,7 @@ public class AutorizacaoController : ControllerBase
     [HttpPost("login")]
     public async Task<IActionResult> Login(LoginRequest request)
     {
-        var senha = _cpriptografiaService.Criptografar(request.Senha);
+        var senha = _cpriptografiaService.Criptografar(request.Password);
         var usuario = await _autenticacaoService.Autenticar(request.Email, senha);
         if (usuario == null)
             return Unauthorized("Usuário ou senha inválidos.");
