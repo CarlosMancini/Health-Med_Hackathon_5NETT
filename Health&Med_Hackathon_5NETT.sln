@@ -5,7 +5,11 @@ VisualStudioVersion = 17.9.34728.123
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Core", "Core\Core.csproj", "{3D48E4EF-C622-4178-ACE6-DFC95472860C}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Infrastructure", "Infrastructure\Infrastructure.csproj", "{5497B169-2EFF-4C41-B617-B03C5BA5D830}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Infrastructure", "Infrastructure\Infrastructure.csproj", "{5497B169-2EFF-4C41-B617-B03C5BA5D830}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "HealthMed", "HealthMed\HealthMed.csproj", "{66BB5881-6FAD-4D2F-B2C4-75EB5332C9D4}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "src", "src", "{B48423DC-5A76-4F7C-8403-B89A99691687}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -21,9 +25,18 @@ Global
 		{5497B169-2EFF-4C41-B617-B03C5BA5D830}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{5497B169-2EFF-4C41-B617-B03C5BA5D830}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{5497B169-2EFF-4C41-B617-B03C5BA5D830}.Release|Any CPU.Build.0 = Release|Any CPU
+		{66BB5881-6FAD-4D2F-B2C4-75EB5332C9D4}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{66BB5881-6FAD-4D2F-B2C4-75EB5332C9D4}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{66BB5881-6FAD-4D2F-B2C4-75EB5332C9D4}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{66BB5881-6FAD-4D2F-B2C4-75EB5332C9D4}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{3D48E4EF-C622-4178-ACE6-DFC95472860C} = {B48423DC-5A76-4F7C-8403-B89A99691687}
+		{5497B169-2EFF-4C41-B617-B03C5BA5D830} = {B48423DC-5A76-4F7C-8403-B89A99691687}
+		{66BB5881-6FAD-4D2F-B2C4-75EB5332C9D4} = {B48423DC-5A76-4F7C-8403-B89A99691687}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {C98D5D2D-4C43-4FB2-BA39-668B224D12BE}
