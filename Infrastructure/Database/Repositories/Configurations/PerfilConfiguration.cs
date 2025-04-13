@@ -8,6 +8,7 @@ namespace Infrastructure.Database.Repository.Configurations
     {
         public void Configure(EntityTypeBuilder<Perfil> builder)
         {
+            builder.ToTable("Perfil");
             builder.HasKey(p => p.Id);
             builder.Property(p => p.Nome).IsRequired().HasMaxLength(50);
         }

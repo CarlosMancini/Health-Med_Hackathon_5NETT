@@ -1,4 +1,5 @@
 ﻿using Core.Entities;
+using Infrastructure.Database.Repository.Configurations;
 using Microsoft.EntityFrameworkCore;
 
 namespace Infrastructure.Database.Repositories

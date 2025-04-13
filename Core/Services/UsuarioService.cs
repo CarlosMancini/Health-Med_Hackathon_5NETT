@@ -20,7 +20,7 @@ namespace Core.Services
         {
             var usuario = await _autenticacaoRepository.Autenticar(email, senha);
 
-            if (usuario == null || usuario.Senha != senha) // aqui você pode aplicar hashing e comparar
+            if (usuario == null || usuario.Senha != senha)
                 return null;
 
             return usuario;

@@ -16,7 +16,9 @@ namespace Infrastructure.Database.Repository
 
         public async Task<Usuario?> Autenticar(string email, string senha)
         {
-            return await _context.Usuarios.FirstOrDefaultAsync(u => u.Email == email && u.Senha == senha);
+            return await _context.Usuarios
+                .Include(u => u.Perfil)
+                .FirstOrDefaultAsync(u => u.Email == email && u.Senha == senha);
         }
     }
 }
