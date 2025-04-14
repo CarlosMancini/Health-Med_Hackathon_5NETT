@@ -1,9 +1,7 @@
-﻿using Core.Interfaces.Repository;
-using Core.Interfaces.Service;
+﻿using Core.Interfaces.Repositories;
 using Core.Interfaces.Services;
 using Core.Services;
 using Infrastructure.Database.Repositories;
-using Infrastructure.Database.Repository;
 using Microsoft.EntityFrameworkCore;
 
 namespace HealthMed.Extensions

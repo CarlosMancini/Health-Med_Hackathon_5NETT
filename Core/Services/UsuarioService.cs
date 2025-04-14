@@ -1,24 +1,28 @@
 ﻿using Core.Entities;
-using Core.Interfaces.Repository;
-using Core.Interfaces.Service;
+using Core.Interfaces.Repositories;
 using Core.Interfaces.Services;
 
 namespace Core.Services
 {
-    public class UsuarioService : IUsuarioService
+    public class UsuarioService : ServiceBase<Usuario>, IUsuarioService
     {
-        private readonly IUsuarioRepository _autenticacaoRepository;
-        private readonly ICriptografiaService _criptografiaService;
+        private readonly IUsuarioRepository _usuarioRepository;
 
-        public UsuarioService(IUsuarioRepository autenticacaoRepository, ICriptografiaService criptografiaService)
+        public UsuarioService(IUsuarioRepository usuarioRepository) : base(usuarioRepository)
         {
-            _autenticacaoRepository = autenticacaoRepository;
-            _criptografiaService = criptografiaService;
+            _usuarioRepository = usuarioRepository;
+        }
+
+        public async Task Cadastrar(Usuario usuario)
+        {
+            // TO DO: add validação de e-mail duplicado
+
+            await _usuarioRepository.Cadastrar(usuario);
         }
 
         public async Task<Usuario?> Autenticar(string email, string senha)
         {
-            var usuario = await _autenticacaoRepository.Autenticar(email, senha);
+            var usuario = await _usuarioRepository.Autenticar(email, senha);
 
             if (usuario == null || usuario.Senha != senha)
                 return null;

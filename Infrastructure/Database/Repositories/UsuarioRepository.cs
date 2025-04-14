@@ -1,15 +1,15 @@
 ﻿using Core.Entities;
-using Core.Interfaces.Repository;
-using Infrastructure.Database.Repositories;
+using Core.Interfaces.Repositories;
+using Infrastructure.Database.Repository;
 using Microsoft.EntityFrameworkCore;
 
-namespace Infrastructure.Database.Repository
+namespace Infrastructure.Database.Repositories
 {
-    public class UsuarioRepository : IUsuarioRepository
+    public class UsuarioRepository : RepositoryBase<Usuario>, IUsuarioRepository
     {
         private readonly ApplicationDbContext _context;
 
-        public UsuarioRepository(ApplicationDbContext context)
+        public UsuarioRepository(ApplicationDbContext context) : base(context)
         {
             _context = context;
         }

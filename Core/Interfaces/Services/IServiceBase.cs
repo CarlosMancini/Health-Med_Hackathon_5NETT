@@ -1,6 +1,6 @@
 ﻿using Core.Entities;
 
-namespace Core.Interfaces.Service
+namespace Core.Interfaces.Services
 {
     public interface IServiceBase<T> where T : EntityBase
     {
