@@ -2,6 +2,6 @@
 {
     public class AgendamentoStatus : EntityBase
     {
-        public string StatusDescricao { get; set; }
+        public string AgendamentoStatusDescricao { get; set; }
     }
 }

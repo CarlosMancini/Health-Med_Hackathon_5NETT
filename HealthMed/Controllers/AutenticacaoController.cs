@@ -1,5 +1,5 @@
-﻿using Core.Interfaces.Services;
-using Microsoft.AspNetCore.Identity.Data;
+﻿using Core.Inputs;
+using Core.Interfaces.Services;
 using Microsoft.AspNetCore.Mvc;
 
 namespace HealthMed.Controllers
@@ -20,10 +20,10 @@ namespace HealthMed.Controllers
         }
 
         [HttpPost("login")]
-        public async Task<IActionResult> Login(LoginRequest request)
+        public async Task<IActionResult> Login(AutenticacaoInput autenticacaoInput)
         {
-            var senha = _cpriptografiaService.Criptografar(request.Password);
-            var usuario = await _usuarioService.Autenticar(request.Email, senha);
+            var senha = _cpriptografiaService.Criptografar(autenticacaoInput.Senha);
+            var usuario = await _usuarioService.Autenticar(autenticacaoInput.Email, senha);
             if (usuario == null)
                 return Unauthorized("Usuário ou senha inválidos.");
 

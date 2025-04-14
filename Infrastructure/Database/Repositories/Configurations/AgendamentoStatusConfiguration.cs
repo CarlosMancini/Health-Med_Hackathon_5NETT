@@ -9,7 +9,7 @@ namespace Infrastructure.Database.Repository.Configurations
         public void Configure(EntityTypeBuilder<AgendamentoStatus> builder)
         {
             builder.HasKey(a => a.Id);
-            builder.Property(a => a.StatusDescricao).IsRequired().HasMaxLength(50);
+            builder.Property(a => a.AgendamentoStatusDescricao).IsRequired().HasMaxLength(50);
         }
     }
 }

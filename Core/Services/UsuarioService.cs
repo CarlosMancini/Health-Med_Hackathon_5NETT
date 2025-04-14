@@ -24,7 +24,7 @@ namespace Core.Services
         {
             var usuario = await _usuarioRepository.Autenticar(email, senha);
 
-            if (usuario == null || usuario.Senha != senha)
+            if (usuario == null || usuario.UsuarioSenha != senha)
                 return null;
 
             return usuario;

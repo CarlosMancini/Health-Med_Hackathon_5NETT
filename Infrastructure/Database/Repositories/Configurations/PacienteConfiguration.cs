@@ -9,7 +9,7 @@ namespace Infrastructure.Database.Repository.Configurations
         public void Configure(EntityTypeBuilder<Paciente> builder)
         {
             builder.HasKey(p => p.Id);
-            builder.HasOne(p => p.Usuario).WithMany().HasForeignKey(p => p.UsuarioId);
+            builder.HasOne(p => p.Usuario).WithMany().HasForeignKey(p => p.Id);
         }
     }
 }

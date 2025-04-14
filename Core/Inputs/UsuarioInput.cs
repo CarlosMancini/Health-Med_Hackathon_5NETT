@@ -12,6 +12,9 @@ namespace Core.Inputs
         [EmailAddress(ErrorMessage = "Formato de e-mail inválido.")]
         public string Email { get; set; }
 
+        [Required(ErrorMessage = "É obrigatório informar o CPF do usuário.")]
+        public string UsuarioCPF { get; set; }
+
         [Required(ErrorMessage = "É obrigatório informar a senha do usuário")]
         [SenhaForte]
         public string Senha { get; set; }

@@ -9,9 +9,9 @@ namespace Infrastructure.Database.Repositories
     {
         public MedicoRepository(ApplicationDbContext context) : base(context) { }
 
-        public async Task<Medico> ObterPorUsuarioId(int id)
+        public async Task<Medico> ObterPorUsuarioId(int usuarioId)
         {
-            return await _dbSet.FirstOrDefaultAsync(x => x.UsuarioId == id);
+            return await _dbSet.FirstOrDefaultAsync(x => x.Id == usuarioId);
         }
     }
 }

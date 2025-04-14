@@ -10,7 +10,7 @@ namespace Infrastructure.Database.Repository.Configurations
         {
             builder.HasKey(m => m.Id);
             builder.Property(m => m.CRM).IsRequired().HasMaxLength(20);
-            builder.HasOne(m => m.Usuario).WithMany().HasForeignKey(m => m.UsuarioId);
+            builder.HasOne(m => m.Usuario).WithMany().HasForeignKey(m => m.Id);
         }
     }
 }

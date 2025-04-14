@@ -29,10 +29,12 @@ namespace HealthMed.Controllers
 
                 Usuario usuario = new Usuario
                 {
-                    Nome = usuarioInput.Nome,
-                    Email = usuarioInput.Email,
-                    Senha = _cpriptografiaService.Criptografar(usuarioInput.Senha),
-                    PerfilId = usuarioInput.PerfilId
+                    UsuarioNome = usuarioInput.Nome,
+                    UsuarioEmail = usuarioInput.Email,
+                    UsuarioCPF = usuarioInput.UsuarioCPF,
+                    UsuarioSenha = _cpriptografiaService.Criptografar(usuarioInput.Senha),
+                    PerfilId = usuarioInput.PerfilId,
+                    CriadoEm = DateTime.Now,
                 };
 
                 await _usuarioService.Cadastrar(usuario);
@@ -41,7 +43,6 @@ namespace HealthMed.Controllers
             }
             catch (Exception e)
             {
-
                 return BadRequest(e.Message);
             }
         }

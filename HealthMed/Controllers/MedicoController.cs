@@ -42,11 +42,12 @@ namespace HealthMed.Controllers
             {
                 Medico medico = new Medico
                 {
-                    UsuarioId = medicoInput.UsuarioId,
+                    Id = medicoInput.UsuarioId,
                     CRM = medicoInput.CRM,
                 };
 
                 await _medicoService.Cadastrar(medico);
+                return Ok("Médico cadastrado com sucesso");
             }
             catch (Exception e)
             {

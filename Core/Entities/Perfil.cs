@@ -2,6 +2,6 @@
 {
     public class Perfil : EntityBase
     {
-        public string Nome { get; set; }
+        public string PerfilDescricao { get; set; }
     }
 }
