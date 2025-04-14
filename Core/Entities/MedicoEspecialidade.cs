@@ -1,8 +1,7 @@
 ﻿namespace Core.Entities
 {
-    public class MedicoEspecialidade
+    public class MedicoEspecialidade : EntityBase
     {
-        public int Id { get; set; }
         public int MedicoId { get; set; }
         public int EspecialidadeId { get; set; }
 

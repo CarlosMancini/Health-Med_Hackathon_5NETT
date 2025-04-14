@@ -1,8 +1,7 @@
 ﻿namespace Core.Entities
 {
-    public class AgendamentoStatus
+    public class AgendamentoStatus : EntityBase
     {
-        public int Id { get; set; }
         public string StatusDescricao { get; set; }
     }
 }

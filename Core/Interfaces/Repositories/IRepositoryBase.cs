@@ -1,6 +1,8 @@
-﻿namespace Core.Interfaces.Repository
+﻿using Core.Entities;
+
+namespace Core.Interfaces.Repository
 {
-    public interface IRepository<T> where T : class
+    public interface IRepositoryBase<T> where T : EntityBase
     {
         Task Cadastrar(T entidade);
         Task Atualizar(T entidade);

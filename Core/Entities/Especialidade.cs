@@ -1,8 +1,7 @@
 ﻿namespace Core.Entities
 {
-    public class Especialidade
+    public class Especialidade : EntityBase
     {
-        public int Id { get; set; }
         public string EspecialidadeDescricao { get; set; }
     }
 }

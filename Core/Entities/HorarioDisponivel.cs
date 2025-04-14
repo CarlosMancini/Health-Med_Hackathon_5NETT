@@ -1,8 +1,7 @@
 ﻿namespace Core.Entities
 {
-    public class HorarioDisponivel
+    public class HorarioDisponivel : EntityBase
     {
-        public int Id { get; set; }
         public int MedicoId { get; set; }
         public DateTime DataHora { get; set; }
 

@@ -1,8 +1,7 @@
 ﻿namespace Core.Entities
 {
-    public class Perfil
+    public class Perfil : EntityBase
     {
-        public int Id { get; set; }
         public string Nome { get; set; }
     }
 }
