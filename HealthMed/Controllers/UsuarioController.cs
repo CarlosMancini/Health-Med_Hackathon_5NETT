@@ -1,45 +1,48 @@
-﻿using Core.Entities;
-using Core.Inputs;
+﻿using Core.Inputs.AdicionarUsuario;
 using Core.Interfaces.Services;
-using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 namespace HealthMed.Controllers
 {
     [ApiController]
     [Route("api/[controller]")]
-    [Authorize]
+    //[Authorize]
     public class UsuarioController : ControllerBase
     {
         private readonly IUsuarioService _usuarioService;
-        private readonly ICriptografiaService _cpriptografiaService;
 
-        public UsuarioController(IUsuarioService usuarioService, ICriptografiaService criptografiaService)
+        public UsuarioController(IUsuarioService usuarioService)
         {
             _usuarioService = usuarioService;
-            _cpriptografiaService = criptografiaService;
         }
 
-        [HttpPost]
-        public async Task<IActionResult> Cadastrar(UsuarioInput usuarioInput)
+        [HttpPost("cadastrar-medico")]
+        public async Task<IActionResult> CadastrarMedico(CadastrarMedicoInput input)
         {
             try
             {
                 if (!ModelState.IsValid) return BadRequest(ModelState);
 
-                Usuario usuario = new Usuario
-                {
-                    UsuarioNome = usuarioInput.Nome,
-                    UsuarioEmail = usuarioInput.Email,
-                    UsuarioCPF = usuarioInput.UsuarioCPF,
-                    UsuarioSenha = _cpriptografiaService.Criptografar(usuarioInput.Senha),
-                    PerfilId = usuarioInput.PerfilId,
-                    CriadoEm = DateTime.Now,
-                };
+                await _usuarioService.CadastrarMedico(input);
 
-                await _usuarioService.Cadastrar(usuario);
+                return Ok("Médico cadastrado com sucesso");
+            }
+            catch (Exception e)
+            {
+                return BadRequest(e.Message);
+            }
+        }
 
-                return Ok("Usuário cadastrado com sucesso");
+        [HttpPost("cadastrar-paciente")]
+        public async Task<IActionResult> CadastrarPaciente(CadastrarPacienteInput input)
+        {
+            try
+            {
+                if (!ModelState.IsValid) return BadRequest(ModelState);
+
+                await _usuarioService.CadastrarPaciente(input);
+
+                return Ok("Paciente cadastrado com sucesso");
             }
             catch (Exception e)
             {

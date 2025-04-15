@@ -19,10 +19,5 @@ namespace Core.Services
 
             await _medicoRepository.Cadastrar(medico);
         }
-
-        public async Task<Medico> ObterPorUsuarioId(int id)
-        {
-            return await _medicoRepository.ObterPorUsuarioId(id);
-        }
     }
 }

@@ -1,4 +1,4 @@
-﻿using Core.Inputs;
+﻿using Core.Inputs.Autenticar;
 using Core.Interfaces.Services;
 using Microsoft.AspNetCore.Mvc;
 

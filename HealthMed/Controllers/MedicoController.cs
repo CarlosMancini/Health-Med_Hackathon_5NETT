@@ -1,5 +1,5 @@
 ﻿using Core.Entities;
-using Core.Inputs;
+using Core.Inputs.AdicionarUsuario;
 using Core.Interfaces.Services;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
@@ -28,7 +28,7 @@ namespace HealthMed.Controllers
         [HttpGet("{id}")]
         public async Task<IActionResult> ObterPorUsuarioId(int id)
         {
-            var medico = await _medicoService.ObterPorUsuarioId(id);
+            var medico = await _medicoService.ObterPorId(id);
             if (medico == null)
                 return NotFound();
 
@@ -36,13 +36,13 @@ namespace HealthMed.Controllers
         }
 
         [HttpPost]
-        public async Task<IActionResult> Cadastrar(MedicoInput medicoInput)
+        public async Task<IActionResult> Cadastrar(CadastrarMedicoInput medicoInput)
         {
             try
             {
                 Medico medico = new Medico
                 {
-                    Id = medicoInput.UsuarioId,
+                    //Id = medicoInput.UsuarioId,
                     CRM = medicoInput.CRM,
                 };
 

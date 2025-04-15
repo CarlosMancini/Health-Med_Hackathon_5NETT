@@ -1,6 +1,6 @@
 ﻿using System.ComponentModel.DataAnnotations;
 
-namespace Core.Inputs
+namespace Core.Inputs.Autenticar
 {
     public class AutenticacaoInput
     {
