@@ -76,7 +76,7 @@ namespace Core.Services
                 UsuarioEmail = input.Email,
                 UsuarioCPF = input.UsuarioCPF,
                 UsuarioSenha = _criptografiaService.Criptografar(input.Senha),
-                PerfilId = (int)PerfilEnum.Medico,
+                PerfilId = (int)PerfilEnum.Paciente,
                 CriadoEm = DateTime.Now,
             };
 

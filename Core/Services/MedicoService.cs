@@ -13,5 +13,10 @@ namespace Core.Services
         {
             _medicoRepository = medicoRepository;
         }
+
+        public async Task<ICollection<Medico>> ObterPorEspecialidade(int especialidadeId)
+        {
+            return await _medicoRepository.ObterPorEspecialidade(especialidadeId);
+        }
     }
 }

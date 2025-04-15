@@ -1,5 +1,4 @@
-﻿using Core.Inputs.Atualizar;
-using Core.Interfaces.Services;
+﻿using Core.Interfaces.Services;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
@@ -24,7 +23,7 @@ namespace HealthMed.Controllers
             return Ok(medicos);
         }
 
-        [HttpGet("{id}")]
+        [HttpGet("{usuarioId}")]
         public async Task<IActionResult> ObterPorId(int id)
         {
             var medico = await _medicoService.ObterPorId(id);
@@ -32,6 +31,21 @@ namespace HealthMed.Controllers
                 return NotFound();
 
             return Ok(medico);
+        }
+
+        [HttpGet("{especialidadeId}")]
+        public async Task<IActionResult> ObterPorEspecialidade(int especialidadeId)
+        {
+            try
+            {
+                var medicos = await _medicoService.ObterPorEspecialidade(especialidadeId);
+
+                return Ok(medicos);
+            }
+            catch (Exception e)
+            {
+                return BadRequest(e.Message);
+            }
         }
     }
 }
