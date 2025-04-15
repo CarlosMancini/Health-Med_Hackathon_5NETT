@@ -9,9 +9,11 @@ namespace Infrastructure.Database.Repositories
     {
         public MedicoRepository(ApplicationDbContext context) : base(context) { }
 
-        public async Task<Medico> ObterPorUsuarioId(int usuarioId)
+        public async Task<Medico?> ObterPorEmail(string email)
         {
-            return await _dbSet.FirstOrDefaultAsync(x => x.Id == usuarioId);
+            return await _context.Medico
+                .Include(u => u.Usuario)
+                .FirstOrDefaultAsync(u => u.Usuario.UsuarioEmail == email);
         }
     }
 }

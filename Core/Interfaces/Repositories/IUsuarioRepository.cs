@@ -6,5 +6,6 @@ namespace Core.Interfaces.Repositories
     public interface IUsuarioRepository : IRepositoryBase<Usuario>
     {
         Task<Usuario?> Autenticar(string email, string senha);
+        Task<Usuario?> ObterPorEmail(string email);
     }
 }

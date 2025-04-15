@@ -20,5 +20,12 @@ namespace Infrastructure.Database.Repositories
                 .Include(u => u.Perfil)
                 .FirstOrDefaultAsync(u => u.UsuarioEmail == email && u.UsuarioSenha == senha);
         }
+
+        public async Task<Usuario?> ObterPorEmail(string email)
+        {
+            return await _context.Usuario
+                .Include(u => u.Perfil)
+                .FirstOrDefaultAsync(u => u.UsuarioEmail == email);
+        }
     }
 }

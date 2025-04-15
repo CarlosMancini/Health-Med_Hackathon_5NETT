@@ -18,10 +18,12 @@ namespace HealthMed.Extensions
             // Repositories
             serviceCollection.AddScoped<IUsuarioRepository, UsuarioRepository>();
             serviceCollection.AddScoped<IMedicoRepository, MedicoRepository>();
+            serviceCollection.AddScoped<IPacienteRepository, PacienteRepository>();
 
             //Services
             serviceCollection.AddScoped<IUsuarioService, UsuarioService>();
             serviceCollection.AddScoped<IMedicoService, MedicoService>();
+            serviceCollection.AddScoped<IPacienteService, PacienteService>();
             serviceCollection.AddScoped<ICriptografiaService, CriptografiaService>();
             serviceCollection.AddScoped<ITokenService, TokenService>();
         }
