@@ -16,9 +16,13 @@ namespace Infrastructure.Database.Repository
             _dbSet = _context.Set<T>();
         }
 
-        public Task Atualizar(T entidade)
+        public async Task Atualizar(T entidade)
         {
-            throw new NotImplementedException();
+            var entidadeOriginal = await ObterPorId(entidade.Id);
+            if (entidadeOriginal is null) throw new Exception("Usuário não existe");
+            _context.Entry(entidadeOriginal).State = EntityState.Detached;
+            _dbSet.Update(entidade);
+            await _context.SaveChangesAsync();
         }
 
         public async Task Cadastrar(T entidade)

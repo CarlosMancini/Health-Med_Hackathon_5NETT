@@ -1,5 +1,6 @@
 ﻿using Core.Entities;
 using Core.Inputs.AdicionarUsuario;
+using Core.Inputs.Atualizar;
 
 namespace Core.Interfaces.Services
 {
@@ -8,5 +9,6 @@ namespace Core.Interfaces.Services
         Task<Usuario?> Autenticar(string email, string senha);
         Task CadastrarMedico(CadastrarMedicoInput input);
         Task CadastrarPaciente(CadastrarPacienteInput input);
+        Task AtualizarMedico(AtualizarMedicoInput input);
     }
 }

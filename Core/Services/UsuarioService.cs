@@ -1,5 +1,6 @@
 ﻿using Core.Entities;
 using Core.Inputs.AdicionarUsuario;
+using Core.Inputs.Atualizar;
 using Core.Interfaces.Repositories;
 using Core.Interfaces.Services;
 using Core.Utils.Enums;
@@ -57,7 +58,7 @@ namespace Core.Services
             var medico = new Medico
             {
                 Id = usuario.Id,
-                CRM = input.CRM
+                MedicoCRM = input.CRM
             };
 
             await _medicoRepository.Cadastrar(medico);
@@ -90,6 +91,32 @@ namespace Core.Services
             };
 
             await _pacienteRepository.Cadastrar(paciente);
+        }
+
+        public async Task AtualizarMedico(AtualizarMedicoInput input)
+        {
+            Usuario usuarioBanco = await _usuarioRepository.ObterPorId(input.Id);
+
+            Usuario usuario = new Usuario
+            {
+                Id = input.Id,
+                UsuarioNome = usuarioBanco.UsuarioNome,
+                UsuarioCPF = usuarioBanco.UsuarioCPF,
+                UsuarioEmail = input.Email,
+                UsuarioSenha = _criptografiaService.Criptografar(input.Senha),
+                PerfilId = (int)PerfilEnum.Medico,
+                CriadoEm = usuarioBanco.CriadoEm,
+            };
+
+            await _usuarioRepository.Atualizar(usuario);
+
+            Medico medico = new Medico
+            {
+                Id = input.Id,
+                MedicoCRM = input.CRM,
+            };
+
+            await _medicoRepository.Atualizar(medico);
         }
     }
 }

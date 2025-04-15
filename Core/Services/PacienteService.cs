@@ -12,12 +12,5 @@ namespace Core.Services
         {
             _pacienteRepository = pacienteRepository;
         }
-
-        public async Task Cadastrar(Paciente paciente)
-        {
-            // TO DO: add validações
-
-            await _pacienteRepository.Cadastrar(paciente);
-        }
     }
 }

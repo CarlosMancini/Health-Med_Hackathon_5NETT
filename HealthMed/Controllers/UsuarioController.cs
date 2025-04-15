@@ -1,4 +1,5 @@
 ﻿using Core.Inputs.AdicionarUsuario;
+using Core.Inputs.Atualizar;
 using Core.Interfaces.Services;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
@@ -44,6 +45,23 @@ namespace HealthMed.Controllers
                 await _usuarioService.CadastrarPaciente(input);
 
                 return Ok("Paciente cadastrado com sucesso");
+            }
+            catch (Exception e)
+            {
+                return BadRequest(e.Message);
+            }
+        }
+
+        [HttpPut("atualizar-medico")]
+        public async Task<IActionResult> AtualizarMedico(AtualizarMedicoInput input)
+        {
+            try
+            {
+                if (!ModelState.IsValid) return BadRequest(ModelState);
+
+                await _usuarioService.AtualizarMedico(input);
+
+                return Ok("Cadastro de médico atualizado");
             }
             catch (Exception e)
             {

@@ -1,5 +1,4 @@
-﻿using Core.Entities;
-using Core.Inputs.AdicionarUsuario;
+﻿using Core.Inputs.Atualizar;
 using Core.Interfaces.Services;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
@@ -26,33 +25,13 @@ namespace HealthMed.Controllers
         }
 
         [HttpGet("{id}")]
-        public async Task<IActionResult> ObterPorUsuarioId(int id)
+        public async Task<IActionResult> ObterPorId(int id)
         {
             var medico = await _medicoService.ObterPorId(id);
             if (medico == null)
                 return NotFound();
 
             return Ok(medico);
-        }
-
-        [HttpPost]
-        public async Task<IActionResult> Cadastrar(CadastrarMedicoInput medicoInput)
-        {
-            try
-            {
-                Medico medico = new Medico
-                {
-                    //Id = medicoInput.UsuarioId,
-                    CRM = medicoInput.CRM,
-                };
-
-                await _medicoService.Cadastrar(medico);
-                return Ok("Médico cadastrado com sucesso");
-            }
-            catch (Exception e)
-            {
-                return BadRequest(e.Message);
-            }
         }
     }
 }

@@ -13,12 +13,5 @@ namespace Infrastructure.Database.Repositories
         {
             _context = context;
         }
-        
-        public async Task<Paciente?> ObterPorEmail(string email)
-        {
-            return await _context.Paciente
-                .Include(u => u.Usuario)
-                .FirstOrDefaultAsync(u => u.Usuario.UsuarioEmail == email);
-        }
     }
 }
