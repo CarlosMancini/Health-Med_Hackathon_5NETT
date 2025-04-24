@@ -1,4 +1,4 @@
-﻿using Core.Entities;
+﻿using Core.Inputs.Compartilhados;
 using System.ComponentModel.DataAnnotations;
 
 namespace Core.Inputs.AdicionarUsuario
@@ -10,5 +10,8 @@ namespace Core.Inputs.AdicionarUsuario
 
         [Required(ErrorMessage = "É obrigatório informar pelo menos uma especialidade")]
         public required ICollection<int> EspecialidadesId { get; set; }
+
+        [Required(ErrorMessage = "É obrigatório informar pelo menos um horário disponível")]
+        public required ICollection<HorarioDisponivelInput> HorariosDisponiveis { get; set; }
     }
 }

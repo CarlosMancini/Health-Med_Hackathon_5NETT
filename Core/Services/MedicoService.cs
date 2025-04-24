@@ -1,6 +1,7 @@
 ﻿using Core.Entities;
 using Core.Inputs.AdicionarUsuario;
 using Core.Inputs.Atualizar;
+using Core.Inputs.Compartilhados;
 using Core.Interfaces.Repositories;
 using Core.Interfaces.Services;
 
@@ -45,9 +46,12 @@ namespace Core.Services
                 throw new Exception("Médico não encontrado");
 
             medico.MedicoCRM = input.CRM;
-            medico.MedicoEspecialidades.Clear();
 
+            medico.MedicoEspecialidades.Clear();
             medico.MedicoEspecialidades = MapearMedicoEspecialidades(input.Id, input.EspecialidadesId);
+
+            medico.HorariosDisponiveis.Clear();
+            medico.HorariosDisponiveis = MapearHorariosDisponiveis(input.Id, input.HorariosDisponiveis);
 
             await _medicoRepository.Atualizar(medico);
         }
@@ -66,6 +70,17 @@ namespace Core.Services
             }
 
             return medicoEspecialidades;
+        }
+
+        private List<HorarioDisponivel> MapearHorariosDisponiveis(int medicoId, ICollection<HorarioDisponivelInput> horariosDisponiveisInputs)
+        {
+            return horariosDisponiveisInputs.Select(h => new HorarioDisponivel
+            {
+                MedicoId = medicoId,
+                HorarioDisponivelDiaSemana = h.DiaSemana,
+                HorarioDisponivelHoraInicio = h.HoraInicio,
+                HorarioDisponivelHoraFim = h.HoraFim
+            }).ToList();
         }
     }
 }
