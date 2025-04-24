@@ -1,4 +1,5 @@
-﻿using Core.Interfaces.Services;
+﻿using Core.Inputs.Atualizar;
+using Core.Interfaces.Services;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
@@ -24,9 +25,9 @@ namespace HealthMed.Controllers
         }
 
         [HttpGet("{usuarioId}")]
-        public async Task<IActionResult> ObterPorId(int id)
+        public async Task<IActionResult> ObterMedicoPorId(int usuarioId)
         {
-            var medico = await _medicoService.ObterPorId(id);
+            var medico = await _medicoService.ObterMedicoPorId(usuarioId);
             if (medico == null)
                 return NotFound();
 
@@ -41,6 +42,23 @@ namespace HealthMed.Controllers
                 var medicos = await _medicoService.ObterPorEspecialidade(especialidadeId);
 
                 return Ok(medicos);
+            }
+            catch (Exception e)
+            {
+                return BadRequest(e.Message);
+            }
+        }
+
+        [HttpPut]
+        public async Task<IActionResult> AtualizarMedico(AtualizarMedicoInput input)
+        {
+            try
+            {
+                if (!ModelState.IsValid) return BadRequest(ModelState);
+
+                await _medicoService.Atualizar(input);
+
+                return Ok("Cadastro de médico atualizado");
             }
             catch (Exception e)
             {

@@ -1,4 +1,5 @@
-﻿using System.ComponentModel.DataAnnotations;
+﻿using Core.Entities;
+using System.ComponentModel.DataAnnotations;
 
 namespace Core.Inputs.AdicionarUsuario
 {
@@ -6,5 +7,8 @@ namespace Core.Inputs.AdicionarUsuario
     {
         [Required(ErrorMessage = "É obrigatório informar o CRM.")]
         public required string CRM { get; set; }
+
+        [Required(ErrorMessage = "É obrigatório informar pelo menos uma especialidade")]
+        public required ICollection<int> EspecialidadesId { get; set; }
     }
 }

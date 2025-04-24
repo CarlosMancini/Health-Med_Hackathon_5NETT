@@ -9,6 +9,13 @@ namespace Infrastructure.Database.Repositories
     {
         public MedicoRepository(ApplicationDbContext context) : base(context) { }
 
+        public async Task<Medico> ObterMedicoPorId(int id)
+        {
+            return await _context.Medico
+                .Include(m => m.MedicoEspecialidades)
+                .FirstOrDefaultAsync(m => m.Id == id);
+        }
+
         public async Task<ICollection<Medico>> ObterPorEspecialidade(int especialidadeId)
         {
             return await _context.Medico
@@ -17,6 +24,5 @@ namespace Infrastructure.Database.Repositories
                 .ThenInclude(me => me.Especialidade)
                 .ToListAsync();
         }
-
     }
 }

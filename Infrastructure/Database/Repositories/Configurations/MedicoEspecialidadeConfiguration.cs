@@ -11,6 +11,17 @@ namespace Infrastructure.Database.Repository.Configurations
             builder.HasKey(me => me.Id);
             builder.HasOne(me => me.Medico).WithMany(m => m.MedicoEspecialidades).HasForeignKey(me => me.MedicoId);
             builder.HasOne(me => me.Especialidade).WithMany().HasForeignKey(me => me.EspecialidadeId);
+
+            // Relacionamentos
+            builder.HasOne(me => me.Medico)
+                .WithMany(m => m.MedicoEspecialidades)
+                .HasForeignKey(me => me.MedicoId)
+                .OnDelete(DeleteBehavior.Cascade);
+
+            builder.HasOne(me => me.Especialidade)
+                .WithMany()
+                .HasForeignKey(me => me.EspecialidadeId)
+                .OnDelete(DeleteBehavior.Restrict);
         }
     }
 }

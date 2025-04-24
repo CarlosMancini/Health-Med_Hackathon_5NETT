@@ -19,7 +19,7 @@ namespace Infrastructure.Database.Repository
         public async Task Atualizar(T entidade)
         {
             var entidadeOriginal = await ObterPorId(entidade.Id);
-            if (entidadeOriginal is null) throw new Exception("Usuário não existe");
+            if (entidadeOriginal is null) throw new Exception("Entidade não existe");
             _context.Entry(entidadeOriginal).State = EntityState.Detached;
             _dbSet.Update(entidade);
             await _context.SaveChangesAsync();

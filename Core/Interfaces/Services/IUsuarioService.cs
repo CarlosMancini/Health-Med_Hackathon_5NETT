@@ -9,6 +9,5 @@ namespace Core.Interfaces.Services
         Task<Usuario?> Autenticar(string email, string senha);
         Task CadastrarMedico(CadastrarMedicoInput input);
         Task CadastrarPaciente(CadastrarPacienteInput input);
-        Task AtualizarMedico(AtualizarMedicoInput input);
     }
 }

@@ -10,20 +10,21 @@ namespace Core.Services
     public class UsuarioService : ServiceBase<Usuario>, IUsuarioService
     {
         private readonly ICriptografiaService _criptografiaService;
+        private readonly IMedicoService _medicoService;
         private readonly IUsuarioRepository _usuarioRepository;
-        private readonly IMedicoRepository _medicoRepository;
         private readonly IPacienteRepository _pacienteRepository;
 
         public UsuarioService(
             ICriptografiaService criptografiaService,
+            IMedicoService medicoService,
             IUsuarioRepository usuarioRepository,
             IMedicoRepository medicoRepository,
             IPacienteRepository pacienteRepository
         ) : base(usuarioRepository)
         {
             _criptografiaService = criptografiaService;
+            _medicoService = medicoService;
             _usuarioRepository = usuarioRepository;
-            _medicoRepository = medicoRepository;
             _pacienteRepository = pacienteRepository;
         }
 
@@ -54,14 +55,7 @@ namespace Core.Services
             };
 
             await _usuarioRepository.Cadastrar(usuario);
-
-            var medico = new Medico
-            {
-                Id = usuario.Id,
-                MedicoCRM = input.CRM
-            };
-
-            await _medicoRepository.Cadastrar(medico);
+            await _medicoService.Cadastrar(usuario.Id, input);
         }
 
         public async Task CadastrarPaciente(CadastrarPacienteInput input)
@@ -91,32 +85,6 @@ namespace Core.Services
             };
 
             await _pacienteRepository.Cadastrar(paciente);
-        }
-
-        public async Task AtualizarMedico(AtualizarMedicoInput input)
-        {
-            Usuario usuarioBanco = await _usuarioRepository.ObterPorId(input.Id);
-
-            Usuario usuario = new Usuario
-            {
-                Id = input.Id,
-                UsuarioNome = usuarioBanco.UsuarioNome,
-                UsuarioCPF = usuarioBanco.UsuarioCPF,
-                UsuarioEmail = input.Email,
-                UsuarioSenha = _criptografiaService.Criptografar(input.Senha),
-                PerfilId = (int)PerfilEnum.Medico,
-                CriadoEm = usuarioBanco.CriadoEm,
-            };
-
-            await _usuarioRepository.Atualizar(usuario);
-
-            Medico medico = new Medico
-            {
-                Id = input.Id,
-                MedicoCRM = input.CRM,
-            };
-
-            await _medicoRepository.Atualizar(medico);
         }
     }
 }
