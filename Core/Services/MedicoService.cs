@@ -86,5 +86,10 @@ namespace Core.Services
                 HorarioDisponivelHoraFim = h.HoraFim
             }).ToList();
         }
+
+        public async Task ExcluirMedico(int usuarioId)
+        {
+            await _medicoRepository.ExcluirMedico(usuarioId);
+        }
     }
 }

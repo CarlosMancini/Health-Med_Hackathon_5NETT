@@ -75,5 +75,20 @@ namespace HealthMed.Controllers
                 return BadRequest(e.Message);
             }
         }
+
+        [HttpDelete]
+        public async Task<IActionResult> ExcluirMedico(int usuarioId)
+        {
+            try
+            {
+                await _medicoService.ExcluirMedico(usuarioId);
+
+                return Ok("Cadastro de médico excluído com sucesso");
+            }
+            catch (Exception e)
+            {
+                return BadRequest(e.Message);
+            }
+        }
     }
 }

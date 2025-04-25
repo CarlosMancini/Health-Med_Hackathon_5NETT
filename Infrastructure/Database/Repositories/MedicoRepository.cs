@@ -25,5 +25,26 @@ namespace Infrastructure.Database.Repositories
                 .ThenInclude(me => me.Especialidade)
                 .ToListAsync();
         }
+
+        public async Task ExcluirMedico(int usuarioId)
+        {
+            var medico = await _context.Medico
+                .Include(m => m.MedicoEspecialidades)
+                .Include(m => m.HorariosDisponiveis)
+                .FirstOrDefaultAsync(m => m.Id == usuarioId);
+
+            if (medico == null)
+                throw new Exception("Médico não encontrado");
+
+            _context.MedicoEspecialidade.RemoveRange(medico.MedicoEspecialidades);
+            _context.HorarioDisponivel.RemoveRange(medico.HorariosDisponiveis);
+            _context.Medico.Remove(medico);
+
+            var usuario = await _context.Usuario.FindAsync(usuarioId);
+            if (usuario != null)
+                _context.Usuario.Remove(usuario);
+
+            await _context.SaveChangesAsync();
+        } 
     }
 }

@@ -7,5 +7,6 @@ namespace Core.Interfaces.Repositories
     {
         Task<Medico> ObterMedicoPorId(int id);
         Task<ICollection<Medico>> ObterPorEspecialidade(int especialidadeId);
+        Task ExcluirMedico(int id);
     }
 }
