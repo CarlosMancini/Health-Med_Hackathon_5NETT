@@ -8,7 +8,7 @@ namespace Core.Interfaces.Services
     {
         Task<Medico> ObterMedicoPorId(int id);
         Task<ICollection<Medico>> ObterPorEspecialidade(int especialidadeId);
-        Task Cadastrar(int usuarioId, CadastrarMedicoInput input);
+        Task Cadastrar(CadastrarMedicoInput input);
         Task Atualizar(AtualizarMedicoInput input);
     }
 }

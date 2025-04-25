@@ -7,5 +7,6 @@ namespace Core.Interfaces.Repositories
     {
         Task<Usuario?> Autenticar(string email, string senha);
         Task<Usuario?> ObterPorEmail(string email);
+        Task<Usuario> CadastrarUsuario(Usuario usuario);
     }
 }

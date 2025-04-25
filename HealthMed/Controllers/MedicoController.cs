@@ -1,4 +1,5 @@
-﻿using Core.Inputs.Atualizar;
+﻿using Core.Inputs.AdicionarUsuario;
+using Core.Inputs.Atualizar;
 using Core.Interfaces.Services;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
@@ -37,11 +38,20 @@ namespace HealthMed.Controllers
         [HttpGet("{especialidadeId}")]
         public async Task<IActionResult> ObterPorEspecialidade(int especialidadeId)
         {
+            var medicos = await _medicoService.ObterPorEspecialidade(especialidadeId);
+            return Ok(medicos);
+        }
+
+        [HttpPost]
+        public async Task<IActionResult> Cadastrar(CadastrarMedicoInput input)
+        {
             try
             {
-                var medicos = await _medicoService.ObterPorEspecialidade(especialidadeId);
+                if (!ModelState.IsValid) return BadRequest(ModelState);
 
-                return Ok(medicos);
+                await _medicoService.Cadastrar(input);
+
+                return Ok("Médico cadastrado com sucesso");
             }
             catch (Exception e)
             {
@@ -50,7 +60,7 @@ namespace HealthMed.Controllers
         }
 
         [HttpPut]
-        public async Task<IActionResult> AtualizarMedico(AtualizarMedicoInput input)
+        public async Task<IActionResult> Atualizar(AtualizarMedicoInput input)
         {
             try
             {

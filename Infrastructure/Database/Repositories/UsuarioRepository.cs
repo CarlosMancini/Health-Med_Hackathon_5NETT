@@ -27,5 +27,13 @@ namespace Infrastructure.Database.Repositories
                 .Include(u => u.Perfil)
                 .FirstOrDefaultAsync(u => u.UsuarioEmail == email);
         }
+
+        public async Task<Usuario> CadastrarUsuario(Usuario usuario)
+        {
+            await _context.AddAsync(usuario);
+            await _context.SaveChangesAsync();
+
+            return usuario;
+        }
     }
 }

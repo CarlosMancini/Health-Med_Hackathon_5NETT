@@ -10,10 +10,12 @@ namespace Core.Services
     public class MedicoService : ServiceBase<Medico>, IMedicoService
     {
         private readonly IMedicoRepository _medicoRepository;
+        private readonly IUsuarioService _usuarioService;
 
-        public MedicoService(IMedicoRepository medicoRepository) : base(medicoRepository)
+        public MedicoService(IMedicoRepository medicoRepository, IUsuarioService usuarioService) : base(medicoRepository)
         {
             _medicoRepository = medicoRepository;
+            _usuarioService = usuarioService;
         }
 
         public async Task<Medico> ObterMedicoPorId(int id)
@@ -26,14 +28,16 @@ namespace Core.Services
             return await _medicoRepository.ObterPorEspecialidade(especialidadeId);
         }
 
-        public async Task Cadastrar(int usuarioId, CadastrarMedicoInput input)
+        public async Task Cadastrar(CadastrarMedicoInput input)
         {
+            Usuario usuario = await _usuarioService.CadastrarUsuario(input);
+
             Medico medico = new Medico
             {
-                Id = usuarioId,
+                Id = usuario.Id,
                 MedicoCRM = input.CRM,
 
-                MedicoEspecialidades = MapearMedicoEspecialidades(usuarioId, input.EspecialidadesId)
+                MedicoEspecialidades = MapearMedicoEspecialidades(usuario.Id, input.EspecialidadesId)
             };
 
             await _medicoRepository.Cadastrar(medico);

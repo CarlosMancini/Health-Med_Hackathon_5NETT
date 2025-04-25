@@ -42,6 +42,8 @@ namespace Core.Services
                 signingCredentials: credentials
             );
 
+            // TO DO: Restrições de controllers por perfil
+
             return new JwtSecurityTokenHandler().WriteToken(token);
         }
     }
