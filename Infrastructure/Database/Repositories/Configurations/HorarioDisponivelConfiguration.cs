@@ -9,8 +9,16 @@ namespace Infrastructure.Database.Repository.Configurations
         public void Configure(EntityTypeBuilder<HorarioDisponivel> builder)
         {
             builder.HasKey(h => h.Id);
-            builder.HasOne(h => h.Medico).WithMany().HasForeignKey(h => h.MedicoId);
-            builder.Property(h => h.DataHora).IsRequired();
+
+            builder.Property(h => h.HorarioDisponivelDiaSemana).IsRequired();
+            builder.Property(h => h.HorarioDisponivelHoraInicio).IsRequired();
+            builder.Property(h => h.HorarioDisponivelHoraFim).IsRequired();
+
+            // Relacionamentos
+            builder.HasOne(h => h.Medico)
+                   .WithMany(m => m.HorariosDisponiveis)
+                   .HasForeignKey(h => h.MedicoId)
+                   .OnDelete(DeleteBehavior.Cascade);
         }
     }
 }

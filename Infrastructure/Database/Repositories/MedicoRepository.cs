@@ -13,6 +13,7 @@ namespace Infrastructure.Database.Repositories
         {
             return await _context.Medico
                 .Include(m => m.MedicoEspecialidades)
+                .Include(m => m.HorariosDisponiveis)
                 .FirstOrDefaultAsync(m => m.Id == id);
         }
 
