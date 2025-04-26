@@ -77,11 +77,11 @@ namespace HealthMed.Controllers
         }
 
         [HttpDelete]
-        public async Task<IActionResult> ExcluirMedico(int usuarioId)
+        public async Task<IActionResult> Excluir(int usuarioId)
         {
             try
             {
-                await _medicoService.ExcluirMedico(usuarioId);
+                await _medicoService.Excluir(usuarioId);
 
                 return Ok("Cadastro de médico excluído com sucesso");
             }

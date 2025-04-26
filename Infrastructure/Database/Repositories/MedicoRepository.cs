@@ -26,12 +26,12 @@ namespace Infrastructure.Database.Repositories
                 .ToListAsync();
         }
 
-        public async Task ExcluirMedico(int usuarioId)
+        public async Task ExcluirMedico(int id)
         {
             var medico = await _context.Medico
                 .Include(m => m.MedicoEspecialidades)
                 .Include(m => m.HorariosDisponiveis)
-                .FirstOrDefaultAsync(m => m.Id == usuarioId);
+                .FirstOrDefaultAsync(m => m.Id == id);
 
             if (medico == null)
                 throw new Exception("Médico não encontrado");
@@ -40,7 +40,7 @@ namespace Infrastructure.Database.Repositories
             _context.HorarioDisponivel.RemoveRange(medico.HorariosDisponiveis);
             _context.Medico.Remove(medico);
 
-            var usuario = await _context.Usuario.FindAsync(usuarioId);
+            var usuario = await _context.Usuario.FindAsync(id);
             if (usuario != null)
                 _context.Usuario.Remove(usuario);
 

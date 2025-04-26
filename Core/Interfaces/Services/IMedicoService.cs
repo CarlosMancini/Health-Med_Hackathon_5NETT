@@ -10,6 +10,6 @@ namespace Core.Interfaces.Services
         Task<ICollection<Medico>> ObterPorEspecialidade(int especialidadeId);
         Task Cadastrar(CadastrarMedicoInput input);
         Task Atualizar(AtualizarMedicoInput input);
-        Task ExcluirMedico(int usuarioId);
+        Task Excluir(int usuarioId);
     }
 }

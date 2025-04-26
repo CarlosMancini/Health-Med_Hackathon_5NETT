@@ -87,7 +87,7 @@ namespace Core.Services
             }).ToList();
         }
 
-        public async Task ExcluirMedico(int usuarioId)
+        public async Task Excluir(int usuarioId)
         {
             await _medicoRepository.ExcluirMedico(usuarioId);
         }

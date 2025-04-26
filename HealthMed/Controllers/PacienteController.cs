@@ -1,7 +1,6 @@
 ﻿using Core.Inputs.AdicionarUsuario;
 using Core.Inputs.Atualizar;
 using Core.Interfaces.Services;
-using Core.Services;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
@@ -54,7 +53,7 @@ namespace HealthMed.Controllers
         }
 
         [HttpPut]
-        public async Task<IActionResult> AtualizarPaciente(AtualizarPacienteInput input)
+        public async Task<IActionResult> Atualizar(AtualizarPacienteInput input)
         {
             try
             {
@@ -63,6 +62,21 @@ namespace HealthMed.Controllers
                 await _pacienteService.Atualizar(input);
 
                 return Ok("Cadastro de paciente atualizado");
+            }
+            catch (Exception e)
+            {
+                return BadRequest(e.Message);
+            }
+        }
+
+        [HttpDelete]
+        public async Task<IActionResult> Excluir(int usuarioId)
+        {
+            try
+            {
+                await _pacienteService.Excluir(usuarioId);
+
+                return Ok("Cadastro de paciente cadastrado com sucesso");
             }
             catch (Exception e)
             {

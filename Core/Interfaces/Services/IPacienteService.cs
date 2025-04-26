@@ -8,5 +8,6 @@ namespace Core.Interfaces.Services
     {
         Task Cadastrar(CadastrarPacienteInput cadastrar);
         Task Atualizar(AtualizarPacienteInput input);
+        Task Excluir(int usuarioId);
     }
 }

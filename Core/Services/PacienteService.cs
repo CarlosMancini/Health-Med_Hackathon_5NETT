@@ -44,5 +44,10 @@ namespace Core.Services
 
             await _pacienteRepository.Atualizar(paciente);
         }
+
+        public async Task Excluir(int usuarioId)
+        {
+            await _pacienteRepository.ExcluirPaciente(usuarioId);
+        }
     }
 }
