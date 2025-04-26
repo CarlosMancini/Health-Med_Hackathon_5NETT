@@ -13,6 +13,7 @@ namespace Core.Inputs.AdicionarUsuario
         public required string Email { get; set; }
 
         [Required(ErrorMessage = "É obrigatório informar o CPF do usuário.")]
+        [CpfValido]
         public required string UsuarioCPF { get; set; }
 
         [Required(ErrorMessage = "É obrigatório informar a senha do usuário")]

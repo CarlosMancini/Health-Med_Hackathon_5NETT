@@ -17,10 +17,21 @@ namespace HealthMed.Controllers
             _usuarioService = usuarioService;
         }
 
-        //[HttpPut]
-        //public async Task<IActionResult> Atualizar(AtualizarUsuarioInput input)
-        //{
+        [HttpPut]
+        public async Task<IActionResult> Atualizar(AtualizarUsuarioInput input)
+        {
+            try
+            {
+                // TO DO: Obter usuário da requisição e permitir que apenas ele atualize as credenciais de si mesmo
 
-        //}
+                await _usuarioService.Atualizar(input);
+
+                return Ok("Credenciais atualizadas com sucesso!");
+            }
+            catch (Exception e)
+            {
+                return BadRequest(e.Message);
+            }
+        }
     }
 }

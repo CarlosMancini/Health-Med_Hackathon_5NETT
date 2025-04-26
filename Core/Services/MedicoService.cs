@@ -4,6 +4,7 @@ using Core.Inputs.Atualizar;
 using Core.Inputs.Compartilhados;
 using Core.Interfaces.Repositories;
 using Core.Interfaces.Services;
+using Core.Utils.Enums;
 
 namespace Core.Services
 {
@@ -30,7 +31,7 @@ namespace Core.Services
 
         public async Task Cadastrar(CadastrarMedicoInput input)
         {
-            Usuario usuario = await _usuarioService.CadastrarUsuario(input);
+            Usuario usuario = await _usuarioService.CadastrarUsuario(input, PerfilEnum.Medico);
 
             Medico medico = new Medico
             {
@@ -45,12 +46,10 @@ namespace Core.Services
 
         public async Task Atualizar(AtualizarMedicoInput input)
         {
-            var medico = await _medicoRepository.ObterMedicoPorId(input.Id);
-            if (medico == null)
-                throw new Exception("Médico não encontrado");
+            var medico = await _medicoRepository.ObterMedicoPorId(input.Id) 
+                ?? throw new Exception("Médico não encontrado");
 
             medico.MedicoCRM = input.CRM;
-
             medico.MedicoEspecialidades.Clear();
             medico.MedicoEspecialidades = MapearMedicoEspecialidades(input.Id, input.EspecialidadesId);
 
@@ -60,7 +59,7 @@ namespace Core.Services
             await _medicoRepository.Atualizar(medico);
         }
 
-        public List<MedicoEspecialidade> MapearMedicoEspecialidades(int id, ICollection<int> especialidadesId)
+        public static List<MedicoEspecialidade> MapearMedicoEspecialidades(int id, ICollection<int> especialidadesId)
         {
             List <MedicoEspecialidade> medicoEspecialidades = new List<MedicoEspecialidade>();
 
@@ -76,7 +75,7 @@ namespace Core.Services
             return medicoEspecialidades;
         }
 
-        private List<HorarioDisponivel> MapearHorariosDisponiveis(int medicoId, ICollection<HorarioDisponivelInput> horariosDisponiveisInputs)
+        private static List<HorarioDisponivel> MapearHorariosDisponiveis(int medicoId, ICollection<HorarioDisponivelInput> horariosDisponiveisInputs)
         {
             return horariosDisponiveisInputs.Select(h => new HorarioDisponivel
             {

@@ -1,5 +1,6 @@
 ﻿using Core.Entities;
 using Core.Inputs.AdicionarUsuario;
+using Core.Inputs.Atualizar;
 using Core.Interfaces.Repositories;
 using Core.Interfaces.Services;
 using Core.Utils.Enums;
@@ -30,7 +31,7 @@ namespace Core.Services
             return usuario;
         }
 
-        public async Task<Usuario> CadastrarUsuario(CadastrarUsuarioInput input)
+        public async Task<Usuario> CadastrarUsuario(CadastrarUsuarioInput input, PerfilEnum perfil)
         {
             var emailJaExiste = await _usuarioRepository.ObterPorEmail(input.Email);
             if (emailJaExiste != null)
@@ -42,11 +43,24 @@ namespace Core.Services
                 UsuarioEmail = input.Email,
                 UsuarioCPF = input.UsuarioCPF,
                 UsuarioSenha = _criptografiaService.Criptografar(input.Senha),
-                PerfilId = (int)PerfilEnum.Medico,
+                PerfilId = (int)perfil,
                 CriadoEm = DateTime.Now,
             };
 
             return await _usuarioRepository.CadastrarUsuario(usuario);
+        }
+
+        public async Task Atualizar(AtualizarUsuarioInput input)
+        {
+            // TO DO: Validar e-mail e senha atuais estão corretos
+
+            var usuario = await _usuarioRepository.ObterPorEmail(input.EmailAtual) 
+                ?? throw new Exception("Usuário não encontrado");
+
+            usuario.UsuarioEmail = input.EmailNovo;
+            usuario.UsuarioSenha = _criptografiaService.Criptografar(input.SenhaNova);
+
+            await _usuarioRepository.Atualizar(usuario);
         }
     }
 }

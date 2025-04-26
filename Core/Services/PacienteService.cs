@@ -3,6 +3,7 @@ using Core.Inputs.AdicionarUsuario;
 using Core.Inputs.Atualizar;
 using Core.Interfaces.Repositories;
 using Core.Interfaces.Services;
+using Core.Utils.Enums;
 
 namespace Core.Services
 {
@@ -19,7 +20,7 @@ namespace Core.Services
 
         public async Task Cadastrar(CadastrarPacienteInput input)
         {
-            Usuario usuario = await _usuarioService.CadastrarUsuario(input);
+            Usuario usuario = await _usuarioService.CadastrarUsuario(input, PerfilEnum.Paciente);
 
             var paciente = new Paciente
             {
