@@ -1,6 +1,7 @@
 ﻿using Core.Entities;
 using Core.Inputs.AdicionarUsuario;
 using Core.Inputs.Atualizar;
+using Core.Inputs.Autenticar;
 using Core.Interfaces.Repositories;
 using Core.Interfaces.Services;
 using Core.Utils.Enums;
@@ -21,11 +22,21 @@ namespace Core.Services
             _usuarioRepository = usuarioRepository;
         }
 
-        public async Task<Usuario?> Autenticar(string email, string senha)
+        public async Task<Usuario?> AutenticarMedico(AutenticacaoMedicoInput input)
         {
-            var usuario = await _usuarioRepository.Autenticar(email, senha);
+            var usuario = await _usuarioRepository.AutenticarMedico(input);
 
-            if (usuario == null || usuario.UsuarioSenha != senha)
+            if (usuario is null || usuario.UsuarioSenha != input.Senha)
+                return null;
+
+            return usuario;
+        }
+
+        public async Task<Usuario?> AutenticarPaciente(AutenticacaoPacienteInput input)
+        {
+            var usuario = await _usuarioRepository.AutenticarPaciente(input);
+
+            if (usuario is null || usuario.UsuarioSenha != input.Senha)
                 return null;
 
             return usuario;

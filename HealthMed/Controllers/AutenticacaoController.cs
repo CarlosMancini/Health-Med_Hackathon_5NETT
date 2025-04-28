@@ -19,17 +19,40 @@ namespace HealthMed.Controllers
             _tokenService = tokenService;
         }
 
-        [HttpPost("login")]
-        public async Task<IActionResult> Login(AutenticacaoInput autenticacaoInput)
+        [HttpPost("medico")]
+        public async Task<IActionResult> LoginMedico(AutenticacaoMedicoInput input)
         {
-            var senha = _cpriptografiaService.Criptografar(autenticacaoInput.Senha);
-            var usuario = await _usuarioService.Autenticar(autenticacaoInput.Email, senha);
-            if (usuario == null)
-                return Unauthorized("Usuário ou senha inválidos.");
+            try
+            {
+                input.Senha = _cpriptografiaService.Criptografar(input.Senha);
+                var usuario = await _usuarioService.AutenticarMedico(input);
+                if (usuario == null)
+                    return Unauthorized("Usuário ou senha inválidos.");
 
-            var token = _tokenService.GerarToken(usuario);
+                return Ok(new { Token = _tokenService.GerarToken(usuario) });
+            }
+            catch (Exception e)
+            {
+                return BadRequest(e.Message);
+            }
+        }
 
-            return Ok(new { Token = token });
+        [HttpPost("paciente")]
+        public async Task<IActionResult> LoginPaciente(AutenticacaoPacienteInput input)
+        {
+            try
+            {
+                input.Senha = _cpriptografiaService.Criptografar(input.Senha);
+                var usuario = await _usuarioService.AutenticarPaciente(input);
+                if (usuario == null)
+                    return Unauthorized("Usuário ou senha inválidos.");
+
+                return Ok(new { Token = _tokenService.GerarToken(usuario) });
+            }
+            catch (Exception e)
+            {
+                return BadRequest(e.Message);
+            }
         }
     }
 }

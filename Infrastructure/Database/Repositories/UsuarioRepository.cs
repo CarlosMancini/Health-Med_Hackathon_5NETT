@@ -1,4 +1,5 @@
 ﻿using Core.Entities;
+using Core.Inputs.Autenticar;
 using Core.Interfaces.Repositories;
 using Infrastructure.Database.Repository;
 using Microsoft.EntityFrameworkCore;
@@ -14,11 +15,28 @@ namespace Infrastructure.Database.Repositories
             _context = context;
         }
 
-        public async Task<Usuario?> Autenticar(string email, string senha)
+        public async Task<Usuario?> AutenticarMedico(AutenticacaoMedicoInput input)
         {
-            return await _context.Usuario
+            var usuario = await _context.Medico
+                .Include(m => m.Usuario)
+                .Include(m => m.Usuario.Perfil)
+                .FirstOrDefaultAsync(m =>
+                    m.MedicoCRM.Trim().ToLower() == input.CRM.Trim().ToLower() &&
+                    m.Usuario.UsuarioSenha == input.Senha);
+
+            return usuario?.Usuario;
+        }
+
+        public async Task<Usuario?> AutenticarPaciente(AutenticacaoPacienteInput input)
+        {
+            var usuario = await _context.Usuario
                 .Include(u => u.Perfil)
-                .FirstOrDefaultAsync(u => u.UsuarioEmail == email && u.UsuarioSenha == senha);
+                .FirstOrDefaultAsync(u =>
+                    (u.UsuarioEmail.Trim().ToLower() == input.Login.Trim().ToLower() ||
+                     u.UsuarioCPF.Trim().Replace(".", "").Replace("-", "") == input.Login.Trim().Replace(".", "").Replace("-", ""))
+                    && u.UsuarioSenha == input.Senha);
+
+            return usuario;
         }
 
         public async Task<Usuario?> ObterPorEmail(string email)
