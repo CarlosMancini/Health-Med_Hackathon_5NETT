@@ -8,12 +8,7 @@ namespace Infrastructure.Database.Repositories
 {
     public class UsuarioRepository : RepositoryBase<Usuario>, IUsuarioRepository
     {
-        private readonly ApplicationDbContext _context;
-
-        public UsuarioRepository(ApplicationDbContext context) : base(context)
-        {
-            _context = context;
-        }
+        public UsuarioRepository(ApplicationDbContext context) : base(context) { }
 
         public async Task<Usuario?> AutenticarMedico(AutenticacaoMedicoInput input)
         {

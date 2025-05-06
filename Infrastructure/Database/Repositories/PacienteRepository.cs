@@ -7,12 +7,7 @@ namespace Infrastructure.Database.Repositories
 {
     public class PacienteRepository : RepositoryBase<Paciente>, IPacienteRepository
     {
-        private readonly ApplicationDbContext _context;
-
-        public PacienteRepository(ApplicationDbContext context) : base(context)
-        {
-            _context = context;
-        }
+        public PacienteRepository(ApplicationDbContext context) : base(context) { }
 
         public async Task ExcluirPaciente(int id)
         {

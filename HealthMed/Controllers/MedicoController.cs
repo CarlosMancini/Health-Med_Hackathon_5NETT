@@ -46,6 +46,8 @@ namespace HealthMed.Controllers
         [HttpGet("pesquisar-medicos-disponiveis")]
         public async Task<IActionResult> PesquisarMedicosDisponiveis(FiltroPesquisaMedicoInput input)
         {
+            // TO DO: não retornar horário disponível caso exista agendamento confirmado
+
             var medicos = await _medicoService.PesquisarMedicosDisponiveis(input);
             return Ok(medicos);
         }

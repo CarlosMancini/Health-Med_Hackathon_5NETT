@@ -19,6 +19,7 @@ namespace HealthMed.Extensions
             serviceCollection.AddScoped<IUsuarioRepository, UsuarioRepository>();
             serviceCollection.AddScoped<IMedicoRepository, MedicoRepository>();
             serviceCollection.AddScoped<IPacienteRepository, PacienteRepository>();
+            serviceCollection.AddScoped<IAgendamentoRepository, AgendamentoRepository>();
 
             //Services
             serviceCollection.AddScoped<IUsuarioService, UsuarioService>();
@@ -26,6 +27,7 @@ namespace HealthMed.Extensions
             serviceCollection.AddScoped<IPacienteService, PacienteService>();
             serviceCollection.AddScoped<ICriptografiaService, CriptografiaService>();
             serviceCollection.AddScoped<ITokenService, TokenService>();
+            serviceCollection.AddScoped<IAgendamentoService, AgendamentoService>();
         }
     }
 }
