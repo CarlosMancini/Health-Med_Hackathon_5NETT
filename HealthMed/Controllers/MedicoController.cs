@@ -1,5 +1,6 @@
 ﻿using Core.Inputs.AdicionarUsuario;
 using Core.Inputs.Atualizar;
+using Core.Inputs.Pesquisar;
 using Core.Interfaces.Services;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
@@ -39,6 +40,13 @@ namespace HealthMed.Controllers
         public async Task<IActionResult> ObterPorEspecialidade(int especialidadeId)
         {
             var medicos = await _medicoService.ObterPorEspecialidade(especialidadeId);
+            return Ok(medicos);
+        }
+
+        [HttpGet("pesquisar-medicos-disponiveis")]
+        public async Task<IActionResult> PesquisarMedicosDisponiveis(FiltroPesquisaMedicoInput input)
+        {
+            var medicos = await _medicoService.PesquisarMedicosDisponiveis(input);
             return Ok(medicos);
         }
 

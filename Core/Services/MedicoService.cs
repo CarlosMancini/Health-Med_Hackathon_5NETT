@@ -1,7 +1,9 @@
-﻿using Core.Entities;
+﻿using Core.DTOs;
+using Core.Entities;
 using Core.Inputs.AdicionarUsuario;
 using Core.Inputs.Atualizar;
 using Core.Inputs.Compartilhados;
+using Core.Inputs.Pesquisar;
 using Core.Interfaces.Repositories;
 using Core.Interfaces.Services;
 using Core.Utils.Enums;
@@ -27,6 +29,11 @@ namespace Core.Services
         public async Task<ICollection<Medico>> ObterPorEspecialidade(int especialidadeId)
         {
             return await _medicoRepository.ObterPorEspecialidade(especialidadeId);
+        }
+
+        public async Task<ICollection<MedicoDisponivelDto>> PesquisarMedicosDisponiveis(FiltroPesquisaMedicoInput input)
+        {
+            return await _medicoRepository.PesquisarMedicosDisponiveis(input);
         }
 
         public async Task Cadastrar(CadastrarMedicoInput input)
