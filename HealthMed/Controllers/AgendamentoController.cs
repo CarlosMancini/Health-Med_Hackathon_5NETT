@@ -1,6 +1,6 @@
 ﻿using Core.Inputs.Cadastrar;
+using Core.Inputs.Pesquisar;
 using Core.Interfaces.Services;
-using Core.Services;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
@@ -18,20 +18,12 @@ namespace HealthMed.Controllers
             _agendamentoService = agendamentoService;
         }
 
-        // TO DO: não permitir agendamento duplicado
-
-        [HttpGet]
-        public async Task<IActionResult> ObterTodos()
+        [HttpGet("pesquisar")]
+        public async Task<IActionResult> Pesquisar([FromQuery] FiltroPesquisaAgendamentoInput input)
         {
-            var agendamentos = await _agendamentoService.ObterTodos();
+            var agendamentos = await _agendamentoService.Pesquisar(input);
             return Ok(agendamentos);
         }
-
-        //[HttpGet("obter-por-medico")]
-        //public async Task<IActionResult> ObterPorMedico(int medicoId)
-        //{
-
-        //}
 
         [HttpPost]
         public async Task<IActionResult> AgendarConsulta(CadastrarAgendamentoInput input)

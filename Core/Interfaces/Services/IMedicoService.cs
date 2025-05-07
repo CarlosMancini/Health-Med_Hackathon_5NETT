@@ -10,7 +10,7 @@ namespace Core.Interfaces.Services
     {
         Task<Medico> ObterMedicoPorId(int usuarioId);
         Task<ICollection<Medico>> ObterPorEspecialidade(int especialidadeId);
-        Task<ICollection<MedicoDisponivelDto>> PesquisarMedicosDisponiveis(FiltroPesquisaMedicoInput input);
+        Task<ICollection<MedicoDisponivelDto>> PesquisarMedicosDisponiveis(FiltroPesquisaMedicoDisponivelInput input);
         Task Cadastrar(CadastrarMedicoInput input);
         Task Atualizar(AtualizarMedicoInput input);
         Task Excluir(int usuarioId);

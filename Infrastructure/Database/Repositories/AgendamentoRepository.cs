@@ -1,5 +1,6 @@
 ﻿using Core.Entities;
 using Core.Inputs.Cadastrar;
+using Core.Inputs.Pesquisar;
 using Core.Interfaces.Repositories;
 using Core.Utils.Enums;
 using Infrastructure.Database.Repository;
@@ -10,6 +11,34 @@ namespace Infrastructure.Database.Repositories
     public class AgendamentoRepository : RepositoryBase<Agendamento>, IAgendamentoRepository
     {
         public AgendamentoRepository(ApplicationDbContext context) : base(context) { }
+
+        public async Task<ICollection<Agendamento>> Pesquisar(FiltroPesquisaAgendamentoInput input)
+        {
+            var query = _context.Agendamento
+                .Include(a => a.Paciente)
+                .Include(a => a.Medico)
+                .Include(a => a.AgendamentoStatus)
+                .Include(a => a.MotivoCancelamento)
+                .AsQueryable();
+
+            if (input.PacienteId.HasValue)
+                query = query.Where(a => a.PacienteId == input.PacienteId.Value);
+
+            if (input.MedicoId.HasValue)
+                query = query.Where(a => a.MedicoId == input.MedicoId.Value);
+
+            if (input.StatusId.HasValue)
+                query = query.Where(a => a.AgendamentoStatusId == input.StatusId.Value);
+
+            if (input.DataHoraInicio.HasValue)
+                query = query.Where(a => a.AgendamentoDataHora >= input.DataHoraInicio.Value);
+
+            if (input.DataHoraFim.HasValue)
+                query = query.Where(a => a.AgendamentoDataHora <= input.DataHoraFim.Value);
+
+            return await query.ToListAsync();
+        }
+
 
         public async Task AgendarConsulta(CadastrarAgendamentoInput input)
         {

@@ -31,7 +31,7 @@ namespace Core.Services
             return await _medicoRepository.ObterPorEspecialidade(especialidadeId);
         }
 
-        public async Task<ICollection<MedicoDisponivelDto>> PesquisarMedicosDisponiveis(FiltroPesquisaMedicoInput input)
+        public async Task<ICollection<MedicoDisponivelDto>> PesquisarMedicosDisponiveis(FiltroPesquisaMedicoDisponivelInput input)
         {
             return await _medicoRepository.PesquisarMedicosDisponiveis(input);
         }

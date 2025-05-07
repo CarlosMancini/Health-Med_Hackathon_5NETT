@@ -28,7 +28,7 @@ namespace Infrastructure.Database.Repositories
                 .ToListAsync();
         }
 
-        public async Task<ICollection<MedicoDisponivelDto>> PesquisarMedicosDisponiveis(FiltroPesquisaMedicoInput input)
+        public async Task<ICollection<MedicoDisponivelDto>> PesquisarMedicosDisponiveis(FiltroPesquisaMedicoDisponivelInput input)
         {
             var datasPeriodo = Enumerable.Range(0, (input.DataFim - input.DataInicio).Days + 1)
                 .Select(offset => input.DataInicio.AddDays(offset))

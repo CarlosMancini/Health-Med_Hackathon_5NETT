@@ -9,7 +9,7 @@ namespace Core.Interfaces.Repositories
     {
         Task<Medico> ObterMedicoPorId(int id);
         Task<ICollection<Medico>> ObterPorEspecialidade(int especialidadeId);
-        Task<ICollection<MedicoDisponivelDto>> PesquisarMedicosDisponiveis(FiltroPesquisaMedicoInput input);
+        Task<ICollection<MedicoDisponivelDto>> PesquisarMedicosDisponiveis(FiltroPesquisaMedicoDisponivelInput input);
         Task ExcluirMedico(int id);
     }
 }

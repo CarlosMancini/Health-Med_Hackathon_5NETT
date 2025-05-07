@@ -2,7 +2,7 @@
 
 namespace Core.Inputs.Pesquisar
 {
-    public class FiltroPesquisaMedicoInput
+    public class FiltroPesquisaMedicoDisponivelInput
     {
         [Required]
         public int EspecialidadeId { get; set; }
