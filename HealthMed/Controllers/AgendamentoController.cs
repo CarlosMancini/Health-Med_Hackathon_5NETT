@@ -50,7 +50,7 @@ namespace HealthMed.Controllers
             {
                 if (!ModelState.IsValid) return BadRequest(ModelState);
 
-                await _agendamentoService.AtualizarStatus();
+                await _agendamentoService.AtualizarStatus(input);
 
                 return Ok("Status do agendamento atualizado com sucesso");
             }
