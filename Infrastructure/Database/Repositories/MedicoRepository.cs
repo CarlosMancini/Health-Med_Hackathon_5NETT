@@ -2,6 +2,7 @@
 using Core.Entities;
 using Core.Inputs.Pesquisar;
 using Core.Interfaces.Repositories;
+using Core.Utils.Enums;
 using Infrastructure.Database.Repository;
 using Microsoft.EntityFrameworkCore;
 
@@ -31,7 +32,7 @@ namespace Infrastructure.Database.Repositories
         public async Task<ICollection<MedicoDisponivelDto>> PesquisarMedicosDisponiveis(FiltroPesquisaMedicoDisponivelInput input)
         {
             var datasPeriodo = Enumerable.Range(0, (input.DataFim - input.DataInicio).Days + 1)
-                .Select(offset => input.DataInicio.AddDays(offset))
+                .Select(offset => input.DataInicio.Date.AddDays(offset))
                 .ToList();
 
             var medicos = await _context.Medico
@@ -44,6 +45,15 @@ namespace Infrastructure.Database.Repositories
                 )
                 .ToListAsync();
 
+            // Carrega todos os agendamentos confirmados no período
+            var agendamentosConfirmados = await _context.Agendamento
+                .Where(a =>
+                    a.AgendamentoStatusId == (int)AgendamentoStatusEnum.Agendado &&
+                    a.AgendamentoDataHora.Date >= input.DataInicio.Date &&
+                    a.AgendamentoDataHora.Date <= input.DataFim.Date
+                )
+                .ToListAsync();
+
             var resultado = new List<MedicoDisponivelDto>();
 
             foreach (var medico in medicos)
@@ -53,8 +63,18 @@ namespace Infrastructure.Database.Repositories
                 foreach (var data in datasPeriodo)
                 {
                     var diaSemana = data.DayOfWeek;
+
                     var horariosDoDia = medico.HorariosDisponiveis
                         .Where(h => h.HorarioDisponivelDiaSemana == diaSemana)
+                        .Where(h =>
+                        {
+                            var horaInicio = data.Add(h.HorarioDisponivelHoraInicio);
+                            var agendado = agendamentosConfirmados.Any(a =>
+                                a.MedicoId == medico.Id &&
+                                a.AgendamentoDataHora == horaInicio
+                            );
+                            return !agendado;
+                        })
                         .Select(h => new HorarioDisponivelDto
                         {
                             HoraInicio = h.HorarioDisponivelHoraInicio.ToString(@"hh\:mm"),
@@ -90,6 +110,7 @@ namespace Infrastructure.Database.Repositories
 
             return resultado;
         }
+
 
         public async Task ExcluirMedico(int id)
         {
