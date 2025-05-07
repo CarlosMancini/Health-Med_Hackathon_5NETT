@@ -1,6 +1,8 @@
 ﻿using Core.Entities;
+using Core.Inputs.Cadastrar;
 using Core.Interfaces.Repositories;
 using Core.Interfaces.Services;
+using Core.Utils.Enums;
 
 namespace Core.Services
 {
@@ -11,6 +13,11 @@ namespace Core.Services
         public AgendamentoService(IAgendamentoRepository agendamentoRepository) : base(agendamentoRepository)
         {
             _agendamentoRepository = agendamentoRepository;
+        }
+
+        public async Task AgendarConsulta(CadastrarAgendamentoInput input)
+        {
+            await _agendamentoRepository.AgendarConsulta(input);
         }
     }
 }
