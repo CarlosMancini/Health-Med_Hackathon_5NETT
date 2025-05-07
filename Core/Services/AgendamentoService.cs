@@ -1,4 +1,5 @@
 ﻿using Core.Entities;
+using Core.Inputs.Atualizar;
 using Core.Inputs.Cadastrar;
 using Core.Inputs.Pesquisar;
 using Core.Interfaces.Repositories;
@@ -24,6 +25,19 @@ namespace Core.Services
         public async Task AgendarConsulta(CadastrarAgendamentoInput input)
         {
             await _agendamentoRepository.AgendarConsulta(input);
+        }
+
+        public async Task AtualizarStatus(AtualizarAgendamentoStatusInput input)
+        {
+            var agendamento = await _agendamentoRepository.ObterPorId(input.AgendamentoId);
+
+            agendamento.AgendamentoStatusId = input.StatusId;
+
+            if (input.StatusId == (int)AgendamentoStatusEnum.Cancelado)
+                agendamento.MotivoCancelamentoId = input.MotivoCancelamentoId;
+            else agendamento.MotivoCancelamentoId = null;
+
+            await _agendamentoRepository.Atualizar(agendamento);
         }
     }
 }

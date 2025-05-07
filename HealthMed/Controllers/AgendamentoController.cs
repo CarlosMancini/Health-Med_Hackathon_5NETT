@@ -1,4 +1,5 @@
-﻿using Core.Inputs.Cadastrar;
+﻿using Core.Inputs.Atualizar;
+using Core.Inputs.Cadastrar;
 using Core.Inputs.Pesquisar;
 using Core.Interfaces.Services;
 using Microsoft.AspNetCore.Authorization;
@@ -35,6 +36,23 @@ namespace HealthMed.Controllers
                 await _agendamentoService.AgendarConsulta(input);
 
                 return Ok("Agendamento realizado com sucesso");
+            }
+            catch (Exception e)
+            {
+                return BadRequest(e.Message);
+            }
+        }
+
+        [HttpPut("atualizar-status")]
+        public async Task<IActionResult> AtualizarStatus(AtualizarAgendamentoStatusInput input)
+        {
+            try
+            {
+                if (!ModelState.IsValid) return BadRequest(ModelState);
+
+                await _agendamentoService.AtualizarStatus();
+
+                return Ok("Status do agendamento atualizado com sucesso");
             }
             catch (Exception e)
             {
