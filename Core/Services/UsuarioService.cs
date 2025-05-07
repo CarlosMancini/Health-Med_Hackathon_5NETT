@@ -22,11 +22,6 @@ namespace Core.Services
             _usuarioRepository = usuarioRepository;
         }
 
-        public async Task<Usuario?> ObterPorEmail(string email)
-        {
-            return await _usuarioRepository.ObterPorEmail(email);
-        }
-
         public async Task<Usuario?> AutenticarMedico(AutenticacaoMedicoInput input)
         {
             var usuario = await _usuarioRepository.AutenticarMedico(input);
