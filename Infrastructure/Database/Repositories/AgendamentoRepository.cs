@@ -69,13 +69,19 @@ namespace Infrastructure.Database.Repositories
             if (conflito)
                 throw new Exception("Esse horário já está agendado para o médico.");
 
+            var valorConsulta = await _context.Medico
+                .Where(x => x.Id == input.MedicoId)
+                .Select(x => x.MedicoValorConsulta)
+                .FirstOrDefaultAsync();
+
             var novoAgendamento = new Agendamento
             {
                 MedicoId = input.MedicoId,
                 PacienteId = input.PacienteId,
                 EspecialidadeId = input.EspecialidadeId,
                 AgendamentoDataHora = input.DataHora,
-                AgendamentoStatusId = (int)AgendamentoStatusEnum.Pendente
+                AgendamentoStatusId = (int)AgendamentoStatusEnum.Pendente,
+                AgendamentoValor = valorConsulta
             };
 
             _context.Agendamento.Add(novoAgendamento);
