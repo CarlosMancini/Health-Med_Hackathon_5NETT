@@ -2,6 +2,7 @@
 using Core.Interfaces.Services;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
+using System.Security.Claims;
 
 namespace HealthMed.Controllers
 {
@@ -22,9 +23,10 @@ namespace HealthMed.Controllers
         {
             try
             {
-                // TO DO: Obter usuário da requisição e permitir que apenas ele atualize as credenciais de si mesmo
+                // Obtém o ID do usuário logado a partir do token
+                var usuarioLogadoId = int.Parse(User.FindFirst(ClaimTypes.NameIdentifier)?.Value ?? "0");
 
-                await _usuarioService.Atualizar(input);
+                await _usuarioService.Atualizar(input, usuarioLogadoId);
 
                 return Ok("Credenciais atualizadas com sucesso!");
             }

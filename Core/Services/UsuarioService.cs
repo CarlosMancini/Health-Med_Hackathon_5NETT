@@ -22,6 +22,11 @@ namespace Core.Services
             _usuarioRepository = usuarioRepository;
         }
 
+        public async Task<Usuario?> ObterPorEmail(string email)
+        {
+            return await _usuarioRepository.ObterPorEmail(email);
+        }
+
         public async Task<Usuario?> AutenticarMedico(AutenticacaoMedicoInput input)
         {
             var usuario = await _usuarioRepository.AutenticarMedico(input);
@@ -61,12 +66,18 @@ namespace Core.Services
             return await _usuarioRepository.CadastrarUsuario(usuario);
         }
 
-        public async Task Atualizar(AtualizarUsuarioInput input)
+        public async Task Atualizar(AtualizarUsuarioInput input, int usuarioLogadoId)
         {
-            // TO DO: Validar e-mail e senha atuais estão corretos
-
-            var usuario = await _usuarioRepository.ObterPorEmail(input.EmailAtual) 
+            var usuario = await _usuarioRepository.ObterPorEmail(input.EmailAtual)
                 ?? throw new Exception("Usuário não encontrado");
+
+            if (usuario.Id != usuarioLogadoId)
+                throw new Exception("Você só pode atualizar suas próprias credenciais.");
+
+            var senhaAtualCriptografada = _criptografiaService.Criptografar(input.SenhaAtual);
+
+            if (usuario.UsuarioSenha != senhaAtualCriptografada)
+                throw new Exception("Senha atual incorreta.");
 
             usuario.UsuarioEmail = input.EmailNovo;
             usuario.UsuarioSenha = _criptografiaService.Criptografar(input.SenhaNova);
