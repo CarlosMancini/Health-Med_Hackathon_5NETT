@@ -44,6 +44,7 @@ namespace Core.Services
             {
                 Id = usuario.Id,
                 MedicoCRM = input.CRM,
+                MedicoValorConsulta = input.ValorConsulta,
 
                 MedicoEspecialidades = MapearMedicoEspecialidades(usuario.Id, input.EspecialidadesId)
             };
@@ -56,7 +57,8 @@ namespace Core.Services
             var medico = await _medicoRepository.ObterMedicoPorId(input.Id) 
                 ?? throw new Exception("Médico não encontrado");
 
-            medico.MedicoCRM = input.CRM;
+            medico.MedicoCRM = input.CRM ?? medico.MedicoCRM;
+            medico.MedicoValorConsulta = input.ValorConsulta ?? medico.MedicoValorConsulta;
             medico.MedicoEspecialidades.Clear();
             medico.MedicoEspecialidades = MapearMedicoEspecialidades(input.Id, input.EspecialidadesId);
 
