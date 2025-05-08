@@ -10,6 +10,9 @@ EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "HealthMed", "HealthMed\HealthMed.csproj", "{66BB5881-6FAD-4D2F-B2C4-75EB5332C9D4}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "src", "src", "{B48423DC-5A76-4F7C-8403-B89A99691687}"
+	ProjectSection(SolutionItems) = preProject
+		Dockerfile = Dockerfile
+	EndProjectSection
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "k8s", "k8s", "{535526AE-CA8F-440F-9526-5B4D95116782}"
 EndProject

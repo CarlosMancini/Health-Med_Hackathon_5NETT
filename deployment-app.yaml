@@ -14,7 +14,7 @@ spec:
     spec:
       containers:
         - name: healthmed-api
-          image: seu-usuario/healthmed:latest
+          image: mancinicadu/healthmed-api:latest
           ports:
             - containerPort: 80
           env:
