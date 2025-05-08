@@ -15,6 +15,7 @@ namespace Infrastructure.Database.Repository.Configurations
             builder.Property(a => a.EspecialidadeId);
             builder.Property(a => a.AgendamentoStatusId);
             builder.Property(a => a.MotivoCancelamentoId);
+            builder.Property(a => a.AgendamentoValor);
                   
             builder.HasOne(a => a.Paciente).WithMany().HasForeignKey(a => a.PacienteId);
             builder.HasOne(a => a.Medico).WithMany().HasForeignKey(a => a.MedicoId);
