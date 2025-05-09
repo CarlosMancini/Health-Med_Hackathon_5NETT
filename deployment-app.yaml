@@ -1,0 +1,22 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: healthmed-api
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: healthmed-api
+  template:
+    metadata:
+      labels:
+        app: healthmed-api
+    spec:
+      containers:
+        - name: healthmed-api
+          image: mancinicadu/healthmed-api:latest
+          ports:
+            - containerPort: 80
+          env:
+            - name: ConnectionStrings__DefaultConnection
+              value: "Server=sqlserver;Database=HealthMedDb;User Id=sa;Password=YourStrong!Passw0rd;"

@@ -7,9 +7,26 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Core", "Core\Core.csproj", 
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Infrastructure", "Infrastructure\Infrastructure.csproj", "{5497B169-2EFF-4C41-B617-B03C5BA5D830}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "HealthMed", "HealthMed\HealthMed.csproj", "{66BB5881-6FAD-4D2F-B2C4-75EB5332C9D4}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "HealthMed", "HealthMed\HealthMed.csproj", "{66BB5881-6FAD-4D2F-B2C4-75EB5332C9D4}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "src", "src", "{B48423DC-5A76-4F7C-8403-B89A99691687}"
+	ProjectSection(SolutionItems) = preProject
+		Dockerfile = Dockerfile
+	EndProjectSection
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "k8s", "k8s", "{535526AE-CA8F-440F-9526-5B4D95116782}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "deployments", "deployments", "{80A28DC0-DE53-4007-A2B1-BD85A71E5527}"
+	ProjectSection(SolutionItems) = preProject
+		deployment-app.yaml = deployment-app.yaml
+		deployment-sql.yaml = deployment-sql.yaml
+	EndProjectSection
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "services", "services", "{AC6443D3-2DAB-48EE-B77C-668DED58A74A}"
+	ProjectSection(SolutionItems) = preProject
+		service-app.yaml = service-app.yaml
+		service-sql.yaml = service-sql.yaml
+	EndProjectSection
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -37,6 +54,8 @@ Global
 		{3D48E4EF-C622-4178-ACE6-DFC95472860C} = {B48423DC-5A76-4F7C-8403-B89A99691687}
 		{5497B169-2EFF-4C41-B617-B03C5BA5D830} = {B48423DC-5A76-4F7C-8403-B89A99691687}
 		{66BB5881-6FAD-4D2F-B2C4-75EB5332C9D4} = {B48423DC-5A76-4F7C-8403-B89A99691687}
+		{80A28DC0-DE53-4007-A2B1-BD85A71E5527} = {535526AE-CA8F-440F-9526-5B4D95116782}
+		{AC6443D3-2DAB-48EE-B77C-668DED58A74A} = {535526AE-CA8F-440F-9526-5B4D95116782}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {C98D5D2D-4C43-4FB2-BA39-668B224D12BE}
