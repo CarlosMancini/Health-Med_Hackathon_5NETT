@@ -6,6 +6,8 @@ using System.Text;
 
 var builder = WebApplication.CreateBuilder(args);
 
+builder.Configuration.AddEnvironmentVariables();
+
 var jwtKey = builder.Configuration["Jwt:Key"];
 
 // Add services to the container.
