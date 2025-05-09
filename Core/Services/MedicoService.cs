@@ -68,7 +68,7 @@ namespace Core.Services
             await _medicoRepository.Atualizar(medico);
         }
 
-        public static List<MedicoEspecialidade> MapearMedicoEspecialidades(int id, ICollection<int> especialidadesId)
+        private static List<MedicoEspecialidade> MapearMedicoEspecialidades(int id, ICollection<int> especialidadesId)
         {
             List <MedicoEspecialidade> medicoEspecialidades = new List<MedicoEspecialidade>();
 

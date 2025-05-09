@@ -24,3 +24,6 @@ jobs:
 
     - name: 🧱 Build do projeto
       run: dotnet build --no-restore --configuration Release
+
+    - name: 🧪 Executar testes
+      run: dotnet test --no-build --configuration Release --verbosity normal

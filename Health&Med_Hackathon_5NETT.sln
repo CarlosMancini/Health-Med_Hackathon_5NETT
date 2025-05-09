@@ -17,16 +17,12 @@ EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "k8s", "k8s", "{535526AE-CA8F-440F-9526-5B4D95116782}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "deployments", "deployments", "{80A28DC0-DE53-4007-A2B1-BD85A71E5527}"
-	ProjectSection(SolutionItems) = preProject
-		deployment-app.yaml = deployment-app.yaml
-		deployment-sql.yaml = deployment-sql.yaml
-	EndProjectSection
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "services", "services", "{AC6443D3-2DAB-48EE-B77C-668DED58A74A}"
-	ProjectSection(SolutionItems) = preProject
-		service-app.yaml = service-app.yaml
-		service-sql.yaml = service-sql.yaml
-	EndProjectSection
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "tests", "tests", "{A5257074-7D0E-4F96-A067-84181206E7DD}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "HealthMed.Tests", "HealthMed.Tests\HealthMed.Tests.csproj", "{61887BF1-6279-47DD-84A6-6894D795DB7F}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -46,6 +42,10 @@ Global
 		{66BB5881-6FAD-4D2F-B2C4-75EB5332C9D4}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{66BB5881-6FAD-4D2F-B2C4-75EB5332C9D4}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{66BB5881-6FAD-4D2F-B2C4-75EB5332C9D4}.Release|Any CPU.Build.0 = Release|Any CPU
+		{61887BF1-6279-47DD-84A6-6894D795DB7F}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{61887BF1-6279-47DD-84A6-6894D795DB7F}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{61887BF1-6279-47DD-84A6-6894D795DB7F}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{61887BF1-6279-47DD-84A6-6894D795DB7F}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -56,6 +56,7 @@ Global
 		{66BB5881-6FAD-4D2F-B2C4-75EB5332C9D4} = {B48423DC-5A76-4F7C-8403-B89A99691687}
 		{80A28DC0-DE53-4007-A2B1-BD85A71E5527} = {535526AE-CA8F-440F-9526-5B4D95116782}
 		{AC6443D3-2DAB-48EE-B77C-668DED58A74A} = {535526AE-CA8F-440F-9526-5B4D95116782}
+		{61887BF1-6279-47DD-84A6-6894D795DB7F} = {A5257074-7D0E-4F96-A067-84181206E7DD}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {C98D5D2D-4C43-4FB2-BA39-668B224D12BE}
