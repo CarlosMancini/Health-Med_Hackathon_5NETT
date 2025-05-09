@@ -52,10 +52,8 @@ namespace Core.Services
             await _medicoRepository.Cadastrar(medico);
         }
 
-        public async Task Atualizar(AtualizarMedicoInput input, int usuarioLogadoId)
+        public async Task Atualizar(AtualizarMedicoInput input)
         {
-
-
             var medico = await _medicoRepository.ObterMedicoPorId(input.Id) 
                 ?? throw new Exception("Médico não encontrado");
 
