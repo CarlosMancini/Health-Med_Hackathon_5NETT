@@ -1,6 +1,7 @@
 ﻿using Core.Inputs.AdicionarUsuario;
 using Core.Inputs.Atualizar;
 using Core.Interfaces.Services;
+using HealthMed.Extensions;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
@@ -19,6 +20,7 @@ namespace HealthMed.Controllers
         }
 
         [HttpGet]
+        [Authorize(Roles = "Administrador,Medico")]
         public async Task<IActionResult> ObterTodos()
         {
             var pacientes = await _pacienteService.ObterTodos();
@@ -36,6 +38,7 @@ namespace HealthMed.Controllers
         }
 
         [HttpPost]
+        [Authorize(Roles = "Administrador")]
         public async Task<IActionResult> Cadastrar(CadastrarPacienteInput input)
         {
             try
@@ -53,11 +56,15 @@ namespace HealthMed.Controllers
         }
 
         [HttpPut]
+        [Authorize(Roles = "Administrador,Paciente")]
         public async Task<IActionResult> Atualizar(AtualizarPacienteInput input)
         {
             try
             {
                 if (!ModelState.IsValid) return BadRequest(ModelState);
+
+                var resultadoValidacao = User.ValidarPermissaoDeAcesso(input.Id);
+                if (resultadoValidacao is ForbidResult) return resultadoValidacao;
 
                 await _pacienteService.Atualizar(input);
 
@@ -70,6 +77,7 @@ namespace HealthMed.Controllers
         }
 
         [HttpDelete]
+        [Authorize(Roles = "Administrador")]
         public async Task<IActionResult> Excluir(int usuarioId)
         {
             try

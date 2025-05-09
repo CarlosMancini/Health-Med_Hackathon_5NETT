@@ -1,5 +1,6 @@
 ﻿using Core.Inputs.Atualizar;
 using Core.Interfaces.Services;
+using HealthMed.Extensions;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using System.Security.Claims;
@@ -25,6 +26,9 @@ namespace HealthMed.Controllers
             {
                 // Obtém o ID do usuário logado a partir do token
                 var usuarioLogadoId = int.Parse(User.FindFirst(ClaimTypes.NameIdentifier)?.Value ?? "0");
+
+                var resultadoValidacao = User.ValidarPermissaoDeAcesso(usuarioLogadoId);
+                if (resultadoValidacao is ForbidResult) return resultadoValidacao;
 
                 await _usuarioService.Atualizar(input, usuarioLogadoId);
 

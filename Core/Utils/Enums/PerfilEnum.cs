@@ -6,6 +6,7 @@ namespace Core.Utils.Enums
     {
         [Description("Médico")]
         Medico = 1,
-        Paciente
+        Paciente,
+        Administrador
     }
 }

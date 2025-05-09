@@ -27,6 +27,7 @@ namespace HealthMed.Controllers
         }
 
         [HttpPost]
+        [Authorize(Roles = "Paciente")]
         public async Task<IActionResult> AgendarConsulta(CadastrarAgendamentoInput input)
         {
             try
@@ -44,6 +45,7 @@ namespace HealthMed.Controllers
         }
 
         [HttpPut("atualizar-status")]
+        [Authorize(Roles = "Medico")]
         public async Task<IActionResult> AtualizarStatus(AtualizarAgendamentoStatusInput input)
         {
             try
