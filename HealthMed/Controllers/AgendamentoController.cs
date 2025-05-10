@@ -20,6 +20,7 @@ namespace HealthMed.Controllers
         }
 
         [HttpGet("pesquisar")]
+        [Authorize(Roles = "Medico,Paciente")]
         public async Task<IActionResult> Pesquisar([FromQuery] FiltroPesquisaAgendamentoInput input)
         {
             var agendamentos = await _agendamentoService.Pesquisar(input);
