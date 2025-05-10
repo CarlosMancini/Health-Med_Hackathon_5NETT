@@ -18,5 +18,6 @@ spec:
           ports:
             - containerPort: 80
           env:
-            - name: ConnectionStrings__DefaultConnection
-              value: "Server=sqlserver;Database=HealthMedDb;User Id=sa;Password=YourStrong!Passw0rd;"
+            - name: ConnectionStrings__ConnectionString
+              value: "Server=sqlserver;Database=HealthMed;User Id=sa;Password=YourStrong!Passw0rd;TrustServerCertificate=True;Encrypt=True;"
+
