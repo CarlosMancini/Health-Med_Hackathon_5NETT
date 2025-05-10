@@ -24,7 +24,6 @@ namespace HealthMed.Controllers
         {
             try
             {
-                // Obtém o ID do usuário logado a partir do token
                 var usuarioLogadoId = int.Parse(User.FindFirst(ClaimTypes.NameIdentifier)?.Value ?? "0");
 
                 var resultadoValidacao = User.ValidarPermissaoDeAcesso(usuarioLogadoId);
