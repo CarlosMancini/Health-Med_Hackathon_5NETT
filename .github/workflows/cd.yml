@@ -25,12 +25,3 @@ jobs:
     - name: Push da imagem para o Docker Hub
       run: |
         docker push ${{ secrets.DOCKER_USERNAME }}/healthmed-api:latest
-
-    - name: Configurar kubeconfig
-      run: |
-        mkdir -p ~/.kube
-        echo "${{ secrets.KUBE_CONFIG }}" > ~/.kube/config
-
-    - name: Deploy no Kubernetes
-      run: |
-        kubectl rollout restart deployment healthmed-deployment
