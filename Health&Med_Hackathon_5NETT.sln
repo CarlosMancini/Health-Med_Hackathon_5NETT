@@ -17,8 +17,16 @@ EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "k8s", "k8s", "{535526AE-CA8F-440F-9526-5B4D95116782}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "deployments", "deployments", "{80A28DC0-DE53-4007-A2B1-BD85A71E5527}"
+	ProjectSection(SolutionItems) = preProject
+		k8s\deployments\deployment-app.yaml = k8s\deployments\deployment-app.yaml
+		k8s\deployments\deployment-sql.yaml = k8s\deployments\deployment-sql.yaml
+	EndProjectSection
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "services", "services", "{AC6443D3-2DAB-48EE-B77C-668DED58A74A}"
+	ProjectSection(SolutionItems) = preProject
+		k8s\services\service-app.yaml = k8s\services\service-app.yaml
+		k8s\services\service-sql.yaml = k8s\services\service-sql.yaml
+	EndProjectSection
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "tests", "tests", "{A5257074-7D0E-4F96-A067-84181206E7DD}"
 EndProject
