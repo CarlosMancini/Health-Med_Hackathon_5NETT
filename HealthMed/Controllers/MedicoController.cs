@@ -2,6 +2,7 @@
 using Core.Inputs.Atualizar;
 using Core.Inputs.Pesquisar;
 using Core.Interfaces.Services;
+using HealthMed.Extensions;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
@@ -20,6 +21,7 @@ namespace HealthMed.Controllers
         }
 
         [HttpGet]
+        [Authorize(Roles = "Administrador")]
         public async Task<IActionResult> ObterTodos()
         {
             var medicos = await _medicoService.ObterTodos();
@@ -44,6 +46,7 @@ namespace HealthMed.Controllers
         }
 
         [HttpGet("pesquisar-medicos-disponiveis")]
+        [Authorize(Roles = "Medico,Paciente")]
         public async Task<IActionResult> PesquisarMedicosDisponiveis([FromQuery] FiltroPesquisaMedicoDisponivelInput input)
         {
             var medicos = await _medicoService.PesquisarMedicosDisponiveis(input);
@@ -51,6 +54,7 @@ namespace HealthMed.Controllers
         }
 
         [HttpPost]
+        [Authorize(Roles = "Administrador")]
         public async Task<IActionResult> Cadastrar(CadastrarMedicoInput input)
         {
             try
@@ -68,11 +72,15 @@ namespace HealthMed.Controllers
         }
 
         [HttpPut]
+        [Authorize(Roles = "Administrador,Medico")]
         public async Task<IActionResult> Atualizar(AtualizarMedicoInput input)
         {
             try
             {
                 if (!ModelState.IsValid) return BadRequest(ModelState);
+
+                var resultadoValidacao = User.ValidarPermissaoDeAcesso(input.Id);
+                if (resultadoValidacao is ForbidResult) return resultadoValidacao;
 
                 await _medicoService.Atualizar(input);
 
@@ -85,6 +93,7 @@ namespace HealthMed.Controllers
         }
 
         [HttpDelete]
+        [Authorize(Roles = "Administrador")]
         public async Task<IActionResult> Excluir(int usuarioId)
         {
             try

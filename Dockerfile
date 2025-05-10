@@ -6,6 +6,7 @@ COPY ../Health&Med_Hackathon_5NETT.sln .
 COPY ./HealthMed/HealthMed.csproj ./HealthMed/
 COPY ./Core/Core.csproj ./Core/
 COPY ./Infrastructure/Infrastructure.csproj ./Infrastructure/
+COPY ./HealthMed.Tests/HealthMed.Tests.csproj ./HealthMed.Tests/
 
 RUN dotnet restore
 

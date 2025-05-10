@@ -10,6 +10,13 @@ jobs:
   build:
     runs-on: ubuntu-latest
 
+    env:
+      Criptografia__Key: ${{ secrets.CRYPTO_KEY }}
+      Criptografia__IV: ${{ secrets.CRYPTO_IV }}
+      Jwt__Key: ${{ secrets.JWT__KEY }}
+      Jwt__Issuer: ${{ secrets.JWT__ISSUER }}
+      Jwt__Audience: ${{ secrets.JWT__AUDIENCE }}
+
     steps:
     - name: 🧾 Checkout do código
       uses: actions/checkout@v3
